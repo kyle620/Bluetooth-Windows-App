@@ -4,13 +4,19 @@
 #include "stdafx.h"
 #include "Bluetooth.h"
 #include <Windows.h>
+#include <string.h>
 
 #define MAX_LOADSTRING 100
+/* this is a macro that will siick a 'L' in front of string literal
+we need the 'L' for unicode ezxtension*/
+#define _TEXT(t) L##t
+#define ID_Button 1
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
+volatile HANDLE serial_handle;					// Used to connect to the BLE Device
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -93,7 +99,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 //        In this function, we save the instance handle in a global variable and
 //        create and display the main program window.
-//	hope this works
+//	
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
@@ -124,8 +130,24 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 // This is where we put buttons and handle actions!
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	wchar_t myString[] = _TEXT("This is a test");
+
     switch (message)
     {
+	case WM_CREATE:
+		/* The 'L" is a wchar_t literal for extended character set. Need it when using Windows.h */
+		/* 1 Way of creating a static text box */
+		//CreateWindowW(L"STATIC",L"This is a test",WS_VISIBLE | WS_CHILD | WS_BORDER, 20, 20, 300, 25, hWnd,NULL, NULL, NULL);
+
+		/* Second way  here we use the  macro we defined in the beginning
+			wchar_t myString = "This is a test";   will complain
+			wchar_t myString = _TEXT("This is a test");  gets rewritten as wchar_t myString[] = L"This is a text"; for the compiler 
+		*/
+		CreateWindowW(L"STATIC", myString, WS_VISIBLE | WS_CHILD | WS_BORDER, 20, 20, 300, 25, hWnd, NULL, NULL, NULL);
+
+		CreateWindowW(L"Button", L"Button 1", WS_VISIBLE| WS_CHILD, 60, 60, 80, 25, hWnd, (HMENU) ID_Button, NULL, NULL);
+		
+		break;
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -138,6 +160,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             case IDM_EXIT:
                 DestroyWindow(hWnd);
                 break;
+			case ID_Button:
+				MessageBox(hWnd,L"This worked",L"Notification",MB_OK);
+				break;
             default:
                 return DefWindowProc(hWnd, message, wParam, lParam);
             }
@@ -180,4 +205,77 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     }
     return (INT_PTR)FALSE;
+}
+
+/* These functions are used for BLED112*/
+void output(uint8 len1, uint8* data1, uint16 len2, uint8* data2)
+{
+	DWORD written;
+
+	if (!WriteFile(serial_handle,
+		data1,
+		len1,
+		&written,
+		NULL
+	))
+	{
+		printf("ERROR: Writing data. %d\n", (int)GetLastError());
+		exit(-1);
+	}
+
+	if (!WriteFile(serial_handle,
+		data2,
+		len2,
+		&written,
+		NULL
+	))
+	{
+		printf("ERROR: Writing data. %d\n", (int)GetLastError());
+		exit(-1);
+	}
+}
+int read_message()
+{
+	DWORD rread;
+	const struct ble_msg *apimsg;
+	struct ble_header apihdr;
+	unsigned char data[256];//enough for BLE
+							//read header
+
+	if (!ReadFile(serial_handle,
+		(unsigned char*)&apihdr,
+		4,
+		&rread,
+		NULL))
+	{
+		return GetLastError();
+	}
+	if (!rread)return 0;
+	//read rest if needed
+	if (apihdr.lolen)
+	{
+		if (!ReadFile(serial_handle,
+			data,
+			apihdr.lolen,
+			&rread,
+			NULL))
+		{
+			return GetLastError();
+		}
+	}
+	apimsg = ble_get_msg_hdr(apihdr);
+	if (!apimsg)
+	{
+		printf("ERROR: Message not found:%d:%d\n", (int)apihdr.cls, (int)apihdr.command);
+		return -1;
+	}
+	apimsg->handler(data);
+
+	return 0;
+}
+
+void print_help()
+{
+	printf("Demo application to scan devices\n");
+	printf("\tscan_example\tCOM-port\n");
 }
