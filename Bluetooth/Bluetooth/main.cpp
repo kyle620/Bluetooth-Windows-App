@@ -21,6 +21,12 @@
 // MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 //
 
+/*
+					Kyle Van Cleave
+					5/18/2016
+ Just an example main it is not actually used at the moment inside the app
+*/
+
 #include <string.h>
 #include "stdafx.h"
 #include <stdio.h>
