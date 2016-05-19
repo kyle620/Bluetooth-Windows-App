@@ -10,3 +10,4 @@
 void Output(uint8 len1, uint8* data1, uint16 len2, uint8* data2);
 int readMessage();
 void printHelp();
+BOOL runBLE(const int& comm);

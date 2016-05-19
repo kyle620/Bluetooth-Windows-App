@@ -58,61 +58,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_BLUETOOTH));
 
     MSG msg;
-
     // Main message loop:
-    while (GetMessage(&msg, nullptr, 0, 0))
-    {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
-    }
-
-	/* FROM amin.cpp under bluegiga's example */
-	char str[80];
-
-	if (comPort == 0)
+	while (GetMessage(&msg, nullptr, 0, 0))
 	{
-		
-	}
-	else {
-
-		snprintf(str, sizeof(str) - 1, "\\\\.\\%d", comPort);
-		ble_handle = CreateFileA(str,
-			GENERIC_READ | GENERIC_WRITE,
-			FILE_SHARE_READ | FILE_SHARE_WRITE,
-			NULL,
-			OPEN_EXISTING,
-			0,
-			NULL);
-
-
-		if (ble_handle == INVALID_HANDLE_VALUE)
+		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
 		{
-			printf("Error opening serialport %d. %d\n", comPort, (int)GetLastError());
-			return -1;
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
 		}
 
-		bglib_output = Output;
-
-
-		//stop previous operation
-		ble_cmd_gap_end_procedure();
-		//get connection status,current command will be handled in response
-		ble_cmd_connection_get_status(0);
-
-		//Message loop
-		while (1)
-		{
-			if (readMessage())
-			{
-				printf("Error reading message\n");
-				break;
-			}
-		}
 	}
-
     return (int) msg.wParam;
 }
 
@@ -233,6 +188,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 					if(DEBUG) OutputDebugString(userInput);
 					comPort = _wtoi(userInput);
+					BOOL ble = true;
+					while (ble) {
+						ble = runBLE(comPort);
+					}
 				}
 				break;
             default:
@@ -349,6 +308,55 @@ int readMessage()
 
 void printHelp()
 {
-	printf("Demo application to scan devices\n");
-	printf("\tscan_example\tCOM-port\n");
+	OutputDebugString(L"Demo application to scan devices\n");
+	OutputDebugString(L"\tscan_example\tCOM-port\n");
+}
+
+/* This method is used to run the BLE device 
+TODO: Testing functin only, need to look into multi-threading 
+		to have BLE running in background of main UI thread */
+BOOL runBLE(const int& comm) {
+	/* FROM amin.cpp under bluegiga's example */
+	char str[80];
+	if(comPort == 0)
+	{
+		return false;
+	}
+	else {
+
+		snprintf(str, sizeof(str) - 1, "\\\\.\\COM%d", comm);
+		ble_handle = CreateFileA(str,
+			GENERIC_READ | GENERIC_WRITE,
+			FILE_SHARE_READ | FILE_SHARE_WRITE,
+			NULL,
+			OPEN_EXISTING,
+			0,
+			NULL);
+
+
+		if (ble_handle == INVALID_HANDLE_VALUE)
+		{
+			OutputDebugString(L"Error opening serialport");
+			return false;
+		}
+
+		bglib_output = Output;
+
+
+		//stop previous operation
+		ble_cmd_gap_end_procedure();
+		//get connection status,current command will be handled in response
+		ble_cmd_connection_get_status(0);
+
+		//Message loop
+		while (1)
+		{
+			if (readMessage())
+			{
+				OutputDebugString(L"Error reading message\n");
+				break;
+			}
+		}
+		return false;
+	}
 }
