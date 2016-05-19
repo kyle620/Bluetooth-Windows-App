@@ -5,20 +5,28 @@
 #include "Bluetooth.h"
 #include <Windows.h>
 #include <string.h>
+#include <string>
+#include <iostream>
+using std::cout;
+using std::endl;
 
 #define MAX_LOADSTRING 100
 /* this is a macro that will siick a 'L' in front of string literal
 we need the 'L' for unicode ezxtension*/
 #define _TEXT(t) L##t
 #define ID_Button 1
-#define ID_Button 2
+#define ID_SUBMITBUTTON 2
 #define ID_EDIT 3
 
 // Global Variables:
+BOOL DEBUG = true;								// used for debugging messages
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
-volatile HANDLE serial_handle;					// Used to connect to the BLE Device
+HWND userhWnd;									// user input hWnd
+volatile HANDLE ble_handle;						// Used to connect to the BLE Device
+int comPort = 0;									// this the port BLED112 is set to
+int count = 0;
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -60,6 +68,50 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             DispatchMessage(&msg);
         }
     }
+
+	/* FROM amin.cpp under bluegiga's example */
+	char str[80];
+
+	if (comPort == 0)
+	{
+		
+	}
+	else {
+
+		snprintf(str, sizeof(str) - 1, "\\\\.\\%d", comPort);
+		ble_handle = CreateFileA(str,
+			GENERIC_READ | GENERIC_WRITE,
+			FILE_SHARE_READ | FILE_SHARE_WRITE,
+			NULL,
+			OPEN_EXISTING,
+			0,
+			NULL);
+
+
+		if (ble_handle == INVALID_HANDLE_VALUE)
+		{
+			printf("Error opening serialport %d. %d\n", comPort, (int)GetLastError());
+			return -1;
+		}
+
+		bglib_output = Output;
+
+
+		//stop previous operation
+		ble_cmd_gap_end_procedure();
+		//get connection status,current command will be handled in response
+		ble_cmd_connection_get_status(0);
+
+		//Message loop
+		while (1)
+		{
+			if (readMessage())
+			{
+				printf("Error reading message\n");
+				break;
+			}
+		}
+	}
 
     return (int) msg.wParam;
 }
@@ -148,9 +200,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		CreateWindowW(L"STATIC", myString, WS_VISIBLE | WS_CHILD | WS_BORDER, 20, 20, 300, 25, hWnd, NULL, NULL, NULL);
 
 		CreateWindowW(L"Button", L"Button 1", WS_VISIBLE| WS_CHILD, 60, 60, 80, 25, hWnd, (HMENU) ID_Button, NULL, NULL);
+		/* Create a user text box */
+		userhWnd = CreateWindowW(L"EDIT", L"Enter COM Port Number", WS_BORDER | WS_CHILD | WS_VISIBLE, 300, 300, 200, 25, hWnd, (HMENU)ID_EDIT, NULL, NULL);
+		/* Creeate submit button, when pressed it should grab the text from userhWnd*/
+		CreateWindowW(L"BUTTON", L"SUBMIT", WS_BORDER | WS_CHILD | WS_VISIBLE, 300, 325, 75, 25, hWnd, (HMENU)ID_SUBMITBUTTON, NULL, NULL);
 		
 		break;
     case WM_COMMAND:
+		/* TODO: User can only input 256 byte messages 
+			I need to add error control for this */
+		//
+		
         {
             int wmId = LOWORD(wParam);
             // Parse the menu selections:
@@ -165,6 +225,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			case ID_Button:
 				MessageBox(hWnd,L"This worked",L"Notification",MB_OK);
 				break;
+			case ID_SUBMITBUTTON:
+				/* TODO: Need to check if user inputed anything */
+				if (userhWnd != NULL) {
+					wchar_t userInput[3];
+					GetWindowText(userhWnd, userInput, 3);
+
+					if(DEBUG) OutputDebugString(userInput);
+					comPort = _wtoi(userInput);
+				}
+				break;
             default:
                 return DefWindowProc(hWnd, message, wParam, lParam);
             }
@@ -178,8 +248,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			TCHAR greeting[] = _T("Hello World!");
 			TextOut(hdc, 5, 5, greeting, _tcslen(greeting));
 
-			/* Create a user text box */
-			TextBox = CreateWindwoW(L"EDIT", L"Enter COM Port Number", WS_BORDER | WS_CHILD | WS_VISIBLE, 50, 50, 300, 25, hWnd, (HMENU)ID_EDIT, NULL, NULL);
             EndPaint(hWnd, &ps);
         }
         break;
@@ -213,11 +281,11 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 /* These functions are used for BLED112*/
-void output(uint8 len1, uint8* data1, uint16 len2, uint8* data2)
+void Output(uint8 len1, uint8* data1, uint16 len2, uint8* data2)
 {
 	DWORD written;
 
-	if (!WriteFile(serial_handle,
+	if (!WriteFile(ble_handle,
 		data1,
 		len1,
 		&written,
@@ -228,7 +296,7 @@ void output(uint8 len1, uint8* data1, uint16 len2, uint8* data2)
 		exit(-1);
 	}
 
-	if (!WriteFile(serial_handle,
+	if (!WriteFile(ble_handle,
 		data2,
 		len2,
 		&written,
@@ -239,7 +307,7 @@ void output(uint8 len1, uint8* data1, uint16 len2, uint8* data2)
 		exit(-1);
 	}
 }
-int read_message()
+int readMessage()
 {
 	DWORD rread;
 	const struct ble_msg *apimsg;
@@ -247,7 +315,7 @@ int read_message()
 	unsigned char data[256];//enough for BLE
 							//read header
 
-	if (!ReadFile(serial_handle,
+	if (!ReadFile(ble_handle,
 		(unsigned char*)&apihdr,
 		4,
 		&rread,
@@ -259,7 +327,7 @@ int read_message()
 	//read rest if needed
 	if (apihdr.lolen)
 	{
-		if (!ReadFile(serial_handle,
+		if (!ReadFile(ble_handle,
 			data,
 			apihdr.lolen,
 			&rread,
@@ -279,7 +347,7 @@ int read_message()
 	return 0;
 }
 
-void print_help()
+void printHelp()
 {
 	printf("Demo application to scan devices\n");
 	printf("\tscan_example\tCOM-port\n");
