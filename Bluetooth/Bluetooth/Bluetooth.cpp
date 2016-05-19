@@ -11,6 +11,8 @@
 we need the 'L' for unicode ezxtension*/
 #define _TEXT(t) L##t
 #define ID_Button 1
+#define ID_Button 2
+#define ID_EDIT 3
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
@@ -175,6 +177,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // TODO: Add any drawing code that uses hdc here...
 			TCHAR greeting[] = _T("Hello World!");
 			TextOut(hdc, 5, 5, greeting, _tcslen(greeting));
+
+			/* Create a user text box */
+			TextBox = CreateWindwoW(L"EDIT", L"Enter COM Port Number", WS_BORDER | WS_CHILD | WS_VISIBLE, 50, 50, 300, 25, hWnd, (HMENU)ID_EDIT, NULL, NULL);
             EndPaint(hWnd, &ps);
         }
         break;
