@@ -582,6 +582,7 @@ void ble_evt_connection_status(const struct ble_msg_connection_status_evt_t *msg
 	else
 	{
 		printf("#Not connected -> Scan\n");
+		/* This command starts the GAP discovery procedure to scan for advertising packets. i.e. to perform device discovery*/
 		ble_cmd_gap_discover(1);
 	}
 }
@@ -637,6 +638,12 @@ void ble_evt_gap_scan_response(const struct ble_msg_gap_scan_response_evt_t *msg
 	for (i = 0; i<6; i++)
 		printf("%02x%s", msg->sender.addr[5 - i], i<5 ? ":" : "");
 	printf("\t%d\n", msg->rssi);
+
+	for (i = 0; i < 31; i++)
+		printf("%d", msg->data.data[i]);
+
+	// try to get information of the remote device
+	//ble_cmd_attclient_find_information(1,0x001,0xffff);
 }
 
 void ble_evt_gap_mode_changed(const struct ble_msg_gap_mode_changed_evt_t *msg)

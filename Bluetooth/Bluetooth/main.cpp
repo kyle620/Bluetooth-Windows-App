@@ -65,7 +65,7 @@ void output(uint8 len1, uint8* data1, uint16 len2, uint8* data2)
 }
 int read_message()
 {
-	DWORD rread;
+	DWORD rread; /* DWORD is a 32bit unsigned integer */
 	const struct ble_msg *apimsg;
 	struct ble_header apihdr;
 	unsigned char data[256];//enough for BLE

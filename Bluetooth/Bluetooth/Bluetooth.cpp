@@ -24,9 +24,15 @@ HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 HWND userhWnd;									// user input hWnd
+HWND bleData;									// used to display output data to window
 volatile HANDLE ble_handle;						// Used to connect to the BLE Device
-int comPort = 0;									// this the port BLED112 is set to
+int comPort = 0;								// this the port BLED112 is set to
 int count = 0;
+
+// Bluetooth Variables
+/* set attribute handle range my idea is that this is used to discvoer all attribute handles and their types(UUID) */
+#define FIRST_HANDLE = 0x0001;
+#define LAST_HANDLE = 0xffff;
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -155,6 +161,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		CreateWindowW(L"STATIC", myString, WS_VISIBLE | WS_CHILD | WS_BORDER, 20, 20, 300, 25, hWnd, NULL, NULL, NULL);
 
 		CreateWindowW(L"Button", L"Button 1", WS_VISIBLE| WS_CHILD, 60, 60, 80, 25, hWnd, (HMENU) ID_Button, NULL, NULL);
+		/* Create BLED112 output window */
+		bleData = CreateWindowW(L"STATIC", L"Waiting for data...", WS_VISIBLE | WS_CHILD | WS_BORDER, 200, 200, 300, 25, hWnd, NULL, NULL, NULL);
 		/* Create a user text box */
 		userhWnd = CreateWindowW(L"EDIT", L"Enter COM Port Number", WS_BORDER | WS_CHILD | WS_VISIBLE, 300, 300, 200, 25, hWnd, (HMENU)ID_EDIT, NULL, NULL);
 		/* Creeate submit button, when pressed it should grab the text from userhWnd*/
@@ -268,7 +276,7 @@ void Output(uint8 len1, uint8* data1, uint16 len2, uint8* data2)
 }
 int readMessage()
 {
-	DWORD rread;
+	DWORD rread; /* This is a 32bit unsigned integer */
 	const struct ble_msg *apimsg;
 	struct ble_header apihdr;
 	unsigned char data[256];//enough for BLE
