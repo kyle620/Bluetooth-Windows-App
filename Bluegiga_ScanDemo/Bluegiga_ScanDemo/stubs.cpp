@@ -632,18 +632,19 @@ void ble_evt_sm_smp_data(const struct ble_msg_sm_smp_data_evt_t *msg)
 {
 }
 
+/*
 void ble_evt_gap_scan_response(const struct ble_msg_gap_scan_response_evt_t *msg)
 {
 	int i;
-	printf("Size of data is: %d\n", sizeof(msg->data));
+	printf("Size of data is: %d\n", msg->data.len);
 	for (i = 0; i<6; i++)
 		printf("%02x%s", msg->sender.addr[5 - i], i<5 ? ":" : "");
 	printf("\t%d\n", msg->rssi);
-	for (i = 0; i < 30; i++)
+	for (i = 0; i < msg->data.len; i++)
 		printf("%d ,", msg->data.data[i]);
 	printf("\n");
 }
-
+*/
 void ble_evt_gap_mode_changed(const struct ble_msg_gap_mode_changed_evt_t *msg)
 {
 }
