@@ -68,6 +68,24 @@ void change_state(states new_state)
 	state = new_state;
 }
 
+/* This method will be called anytime a successful connection to a remote device has been made */
+void ble_evt_connection_status(const struct ble_msg_connection_status_evt_t *msg)
+{
+	// New connection
+	if (msg->flags & connection_connected) {
+		change_state(state_connected);
+		printf("Connected\n");
+
+		// Find primary services
+		change_state(state_finding_services);
+		//ble_cmd_attclient_read_by_group_type(msg->connection, FIRST_HANDLE, LAST_HANDLE, 2, primary_service_uuid);
+	}
+
+	else {
+		printf("Not connected,\t scanning:\n");
+	}
+}
+
 /* print method to print out the address */
 void print_bdaddr(bd_addr bdaddr)
 {
@@ -219,13 +237,19 @@ void ble_evt_gap_scan_response(const struct ble_msg_gap_scan_response_evt_t *msg
 
 int main(int argc, char *argv[])
 {
+	action = action_scan;
 
-	connect_addr.addr[0] = 0x00;
-	connect_addr.addr[1] = 0x07;
-	connect_addr.addr[2] = 0x80;
-	connect_addr.addr[3] = 0x33;
-	connect_addr.addr[4] = 0xd7;
-	connect_addr.addr[5] = 0xcf;
+	/* this is the sending address of the remote device i want to connect to
+		the order of the bytes matter 
+		EXAMPLE: connect to: 00:07:80:33:d7:cf 
+								
+	*/
+	connect_addr.addr[5] = 0x00;
+	connect_addr.addr[4] = 0x07;	
+	connect_addr.addr[3] = 0x80;
+	connect_addr.addr[2] = 0x33;
+	connect_addr.addr[1] = 0xd7;
+	connect_addr.addr[0] = 0xcf;
 
 	// used to hold user input
 	int input;
@@ -265,20 +289,6 @@ int main(int argc, char *argv[])
 	//get connection status,current command will be handled in response
 	ble_cmd_connection_get_status(0);
 
-	// Execute action
-	if (action == action_scan) {
-		ble_cmd_gap_discover(gap_discover_observation);
-	}
-	else if (action == action_info) {
-		ble_cmd_system_get_info();
-	}
-	else if (action == action_connect) {
-		printf("Trying to connect\n");
-		change_state(state_connecting);
-		ble_cmd_gap_connect_direct(&connect_addr, gap_address_type_public, 40, 60, 100, 0);
-	}
-
-	//Message loop
 	while (1)
 	{
 		if (read_message())
@@ -286,7 +296,28 @@ int main(int argc, char *argv[])
 			printf("Error reading message\n");
 			break;
 		}
+
+	// Execute action
+	if (action == action_scan) {
+		//ble_cmd_gap_discover(gap_discover_observation);
 	}
+	else if (action == action_info) {
+		ble_cmd_system_get_info();
+	}
+	else if (action == action_connect) {
+		//printf("Trying to connect\n");
+		change_state(state_connecting);
+		ble_cmd_gap_connect_direct(&connect_addr, gap_address_type_public, 40, 60, 100, 0);
+	}
+
+	/* check if the device we want to connect to exists */
+	if (action != action_connect) {
+		for (int i = 0; i < found_devices_count; i++) {
+			if (cmp_bdaddr(found_devices[i], connect_addr)) action = action_connect;
+		}
+	}
+	 
+}
 
 	return 0;
 }

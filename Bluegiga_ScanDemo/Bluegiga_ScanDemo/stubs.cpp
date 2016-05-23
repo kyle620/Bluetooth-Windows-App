@@ -573,7 +573,7 @@ void ble_evt_flash_ps_key(const struct ble_msg_flash_ps_key_evt_t *msg)
 {
 }
 
-void ble_evt_connection_status(const struct ble_msg_connection_status_evt_t *msg)
+/*void ble_evt_connection_status(const struct ble_msg_connection_status_evt_t *msg)
 {
 	if (msg->flags&connection_connected)
 	{
@@ -585,7 +585,7 @@ void ble_evt_connection_status(const struct ble_msg_connection_status_evt_t *msg
 		printf("#Not connected -> Scan\n");
 		ble_cmd_gap_discover(1);
 	}
-}
+} */
 
 void ble_evt_connection_version_ind(const struct ble_msg_connection_version_ind_evt_t *msg)
 {
