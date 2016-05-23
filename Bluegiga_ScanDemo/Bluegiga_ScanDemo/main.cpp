@@ -22,6 +22,7 @@
 //
 #include "stdafx.h"
 #include <string>
+#include <vector>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,12 +33,20 @@
 
 using std::cin;
 using std::cout;
+using std::vector;
+
+#define FIRST_HANDLE 0x0001
+#define LAST_HANDLE 0xffff
 
 /* Keep track of all found devices */
 #define MAX_DEVICES 64
 int found_devices_count = 0;
 bd_addr found_devices[MAX_DEVICES];
 bd_addr connect_addr;
+vector<uint16> uuidVector;
+
+
+uint8 primary_service_uuid[] = { 0x00, 0x28 };
 
 
 enum actions {
@@ -75,16 +84,63 @@ void ble_evt_connection_status(const struct ble_msg_connection_status_evt_t *msg
 	if (msg->flags & connection_connected) {
 		change_state(state_connected);
 		printf("Connected\n");
-
 		// Find primary services
 		change_state(state_finding_services);
-		//ble_cmd_attclient_read_by_group_type(msg->connection, FIRST_HANDLE, LAST_HANDLE, 2, primary_service_uuid);
+		ble_cmd_attclient_read_by_group_type(msg->connection, FIRST_HANDLE, LAST_HANDLE, 2, primary_service_uuid);
+		
 	}
 
 	else {
 		printf("Not connected,\t scanning:\n");
 	}
 }
+/* This event is produced when an attribe group (service) is found */
+void ble_evt_attclient_group_found(const struct ble_msg_attclient_group_found_evt_t *msg)
+{
+	if (msg->uuid.len == 0) return;
+	uint16 uuid = (msg->uuid.data[1] << 8) | msg->uuid.data[0];
+	printf("Found: %02x\n", uuid);
+	uuidVector.push_back(uuid);
+
+}
+
+/* This method is called after the GROUP FOUND event has finished*/
+void ble_evt_attclient_procedure_completed(const struct ble_msg_attclient_procedure_completed_evt_t *msg)
+{
+
+	// check if we have an error
+	if (msg->result != 0) {
+		printf("Error occured: Operation was not succesful\n");
+	}
+	if (state == state_finding_services) {
+		change_state(state_finding_attributes);
+
+		printf("Operation Succesful!\n");
+		for (vector<uint16>::iterator it = uuidVector.begin(); it != uuidVector.end(); it++) {
+			printf("%02x ,", *it);
+		}
+		printf("\n");
+
+		ble_cmd_attclient_find_information(msg->connection, FIRST_HANDLE, LAST_HANDLE);
+	}
+	else if (state == state_finding_attributes) {
+		change_state(state_listening_measurements);
+	}
+	else {
+
+	}	
+}
+
+void ble_evt_attclient_find_information_found(const struct ble_msg_attclient_find_information_found_evt_t *msg)
+{
+	if (msg->uuid.len == 2) {
+		uint16 uuid = (msg->uuid.data[1] << 8) | msg->uuid.data[0];
+		printf("Inside information_found: %02x\n", uuid);
+	}
+
+	change_state(state_finish);
+}
+
 
 /* print method to print out the address */
 void print_bdaddr(bd_addr bdaddr)
@@ -237,6 +293,8 @@ void ble_evt_gap_scan_response(const struct ble_msg_gap_scan_response_evt_t *msg
 
 int main(int argc, char *argv[])
 {
+	uuidVector.reserve(50);
+
 	action = action_scan;
 
 	/* this is the sending address of the remote device i want to connect to
@@ -289,22 +347,25 @@ int main(int argc, char *argv[])
 	//get connection status,current command will be handled in response
 	ble_cmd_connection_get_status(0);
 
+
 	while (1)
 	{
-		if (read_message())
-		{
-			printf("Error reading message\n");
-			break;
-		}
-
+		//if (action == action_scan) {
+			if (read_message())
+			{
+				printf("Error reading message\n");
+				break;
+			}
+	//	}
+		
 	// Execute action
 	if (action == action_scan) {
-		//ble_cmd_gap_discover(gap_discover_observation);
+		ble_cmd_gap_discover(gap_discover_observation);
 	}
 	else if (action == action_info) {
 		ble_cmd_system_get_info();
 	}
-	else if (action == action_connect) {
+	else if (state != state_connected) {
 		//printf("Trying to connect\n");
 		change_state(state_connecting);
 		ble_cmd_gap_connect_direct(&connect_addr, gap_address_type_public, 40, 60, 100, 0);
