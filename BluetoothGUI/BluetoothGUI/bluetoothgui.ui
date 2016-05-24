@@ -32,7 +32,7 @@
      <rect>
       <x>10</x>
       <y>60</y>
-      <width>311</width>
+      <width>201</width>
       <height>31</height>
      </rect>
     </property>
@@ -45,7 +45,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="input_comPort"/>
      </item>
     </layout>
    </widget>
@@ -60,21 +60,21 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="button_connect">
        <property name="text">
         <string>Connect</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="button_disconnet">
        <property name="text">
         <string>Disconnect</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="button_scan">
        <property name="text">
         <string>Scan</string>
        </property>
@@ -82,27 +82,14 @@
      </item>
     </layout>
    </widget>
-   <widget class="QTextBrowser" name="textBrowser">
+   <widget class="QTextBrowser" name="LOG">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>40</y>
-      <width>441</width>
-      <height>261</height>
+      <x>0</x>
+      <y>371</y>
+      <width>781</width>
+      <height>141</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>290</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
     </property>
    </widget>
   </widget>
@@ -154,5 +141,58 @@
  <resources>
   <include location="bluetoothgui.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>BluetoothGUIClass</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>387</x>
+     <y>258</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_connect</sender>
+   <signal>clicked()</signal>
+   <receiver>BluetoothGUIClass</receiver>
+   <slot>button_connectClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>87</x>
+     <y>180</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>184</x>
+     <y>180</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_disconnet</sender>
+   <signal>clicked()</signal>
+   <receiver>BluetoothGUIClass</receiver>
+   <slot>button_disconnectClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>77</x>
+     <y>213</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>181</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>button_connectClicked()</slot>
+  <slot>button_disconnectClicked()</slot>
+ </slots>
 </ui>

@@ -38,14 +38,13 @@ public:
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *label_2;
-    QLineEdit *lineEdit;
+    QLineEdit *input_comPort;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton_3;
-    QPushButton *pushButton;
-    QTextBrowser *textBrowser;
-    QPushButton *pushButton_4;
+    QPushButton *button_connect;
+    QPushButton *button_disconnet;
+    QPushButton *button_scan;
+    QTextBrowser *LOG;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuHelp;
@@ -68,7 +67,7 @@ public:
         label->setGeometry(QRect(16, 23, 51, 20));
         horizontalLayoutWidget = new QWidget(centralWidget);
         horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(10, 60, 311, 31));
+        horizontalLayoutWidget->setGeometry(QRect(10, 60, 201, 31));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -79,10 +78,10 @@ public:
 
         horizontalLayout->addWidget(label_2);
 
-        lineEdit = new QLineEdit(horizontalLayoutWidget);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
+        input_comPort = new QLineEdit(horizontalLayoutWidget);
+        input_comPort->setObjectName(QStringLiteral("input_comPort"));
 
-        horizontalLayout->addWidget(lineEdit);
+        horizontalLayout->addWidget(input_comPort);
 
         verticalLayoutWidget = new QWidget(centralWidget);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
@@ -92,27 +91,24 @@ public:
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        pushButton_2 = new QPushButton(verticalLayoutWidget);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        button_connect = new QPushButton(verticalLayoutWidget);
+        button_connect->setObjectName(QStringLiteral("button_connect"));
 
-        verticalLayout->addWidget(pushButton_2);
+        verticalLayout->addWidget(button_connect);
 
-        pushButton_3 = new QPushButton(verticalLayoutWidget);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+        button_disconnet = new QPushButton(verticalLayoutWidget);
+        button_disconnet->setObjectName(QStringLiteral("button_disconnet"));
 
-        verticalLayout->addWidget(pushButton_3);
+        verticalLayout->addWidget(button_disconnet);
 
-        pushButton = new QPushButton(verticalLayoutWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
+        button_scan = new QPushButton(verticalLayoutWidget);
+        button_scan->setObjectName(QStringLiteral("button_scan"));
 
-        verticalLayout->addWidget(pushButton);
+        verticalLayout->addWidget(button_scan);
 
-        textBrowser = new QTextBrowser(centralWidget);
-        textBrowser->setObjectName(QStringLiteral("textBrowser"));
-        textBrowser->setGeometry(QRect(330, 40, 441, 261));
-        pushButton_4 = new QPushButton(centralWidget);
-        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
-        pushButton_4->setGeometry(QRect(20, 290, 75, 23));
+        LOG = new QTextBrowser(centralWidget);
+        LOG->setObjectName(QStringLiteral("LOG"));
+        LOG->setGeometry(QRect(0, 371, 781, 141));
         BluetoothGUIClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(BluetoothGUIClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -134,6 +130,9 @@ public:
         menuFile->addAction(actionExit);
 
         retranslateUi(BluetoothGUIClass);
+        QObject::connect(actionExit, SIGNAL(triggered()), BluetoothGUIClass, SLOT(close()));
+        QObject::connect(button_connect, SIGNAL(clicked()), BluetoothGUIClass, SLOT(button_connectClicked()));
+        QObject::connect(button_disconnet, SIGNAL(clicked()), BluetoothGUIClass, SLOT(button_disconnectClicked()));
 
         QMetaObject::connectSlotsByName(BluetoothGUIClass);
     } // setupUi
@@ -144,10 +143,9 @@ public:
         actionExit->setText(QApplication::translate("BluetoothGUIClass", "Exit", 0));
         label->setText(QApplication::translate("BluetoothGUIClass", "Scan", 0));
         label_2->setText(QApplication::translate("BluetoothGUIClass", "Enter BLED112 COMPORT:", 0));
-        pushButton_2->setText(QApplication::translate("BluetoothGUIClass", "Connect", 0));
-        pushButton_3->setText(QApplication::translate("BluetoothGUIClass", "Disconnect", 0));
-        pushButton->setText(QApplication::translate("BluetoothGUIClass", "Scan", 0));
-        pushButton_4->setText(QApplication::translate("BluetoothGUIClass", "PushButton", 0));
+        button_connect->setText(QApplication::translate("BluetoothGUIClass", "Connect", 0));
+        button_disconnet->setText(QApplication::translate("BluetoothGUIClass", "Disconnect", 0));
+        button_scan->setText(QApplication::translate("BluetoothGUIClass", "Scan", 0));
         menuFile->setTitle(QApplication::translate("BluetoothGUIClass", "File", 0));
         menuHelp->setTitle(QApplication::translate("BluetoothGUIClass", "Help", 0));
     } // retranslateUi
