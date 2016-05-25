@@ -4,6 +4,8 @@
 
 #include "stdafx.h"
 #include "cmd_def.h"
+#include <qserialport.h>				/* used for serial connection */
+#include <qserialportinfo.h>			/* used for listing available serial ports */
 
 	/*! 
 	
@@ -16,11 +18,12 @@ class BLE112
 {
 
 public:
-	BLE112(int port = 12) :comPort(port) { qDebug() << "BLE112 constructor called"; };
+	BLE112(QSerialPort * serial) :bled112(serial) { qDebug() << "BLE112 constructor called"; };
 	~BLE112();
 
 private:
 	int comPort;
+	QSerialPort *bled112;
 
 };
 

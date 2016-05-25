@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>776</width>
+    <width>778</width>
     <height>517</height>
    </rect>
   </property>
@@ -14,11 +14,11 @@
    <string>BluetoothGUI</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="label_scan">
     <property name="geometry">
      <rect>
-      <x>16</x>
-      <y>23</y>
+      <x>10</x>
+      <y>50</y>
       <width>51</width>
       <height>20</height>
      </rect>
@@ -30,8 +30,8 @@
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>60</y>
+      <x>570</x>
+      <y>0</y>
       <width>201</width>
       <height>31</height>
      </rect>
@@ -49,56 +49,127 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>140</y>
-      <width>111</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QPushButton" name="button_connect">
-       <property name="text">
-        <string>Connect</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="button_disconnet">
-       <property name="text">
-        <string>Disconnect</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="button_scan">
-       <property name="text">
-        <string>Scan</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QTextBrowser" name="LOG">
+   <widget class="QComboBox" name="serial_portList">
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>371</y>
-      <width>781</width>
-      <height>141</height>
+      <y>0</y>
+      <width>341</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Select a device</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="button_connect">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>0</y>
+      <width>109</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Attach</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_disconnet">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>0</y>
+      <width>109</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Detatch</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_scan">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>80</y>
+      <width>109</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Scan</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="textBrowser">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>30</y>
+      <width>541</width>
+      <height>301</height>
      </rect>
     </property>
    </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>340</y>
+      <width>761</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="log_label">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(129, 129, 129);</string>
+       </property>
+       <property name="text">
+        <string>Log</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextBrowser" name="LOG"/>
+     </item>
+    </layout>
+   </widget>
+   <zorder>label_scan</zorder>
+   <zorder>horizontalLayoutWidget</zorder>
+   <zorder>serial_portList</zorder>
+   <zorder>label_log</zorder>
+   <zorder>LOG</zorder>
+   <zorder>label</zorder>
+   <zorder>textBrowser</zorder>
+   <zorder>log_label</zorder>
+   <zorder>LOG</zorder>
+   <zorder>input_comPort</zorder>
+   <zorder>button_connect</zorder>
+   <zorder>button_disconnet</zorder>
+   <zorder>button_scan</zorder>
+   <zorder>textBrowser</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>776</width>
+     <width>778</width>
      <height>21</height>
     </rect>
    </property>
@@ -190,9 +261,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>serial_portList</sender>
+   <signal>highlighted(int)</signal>
+   <receiver>BluetoothGUIClass</receiver>
+   <slot>dropbox_serial_portList(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>537</x>
+     <y>102</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>536</x>
+     <y>155</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>button_connectClicked()</slot>
   <slot>button_disconnectClicked()</slot>
+  <slot>dropbox_serial_portList(int)</slot>
  </slots>
 </ui>
