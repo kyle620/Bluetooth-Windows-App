@@ -116,7 +116,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -149,16 +149,10 @@
      </item>
     </layout>
    </widget>
+   <zorder>layoutWidget</zorder>
    <zorder>label_scan</zorder>
    <zorder>horizontalLayoutWidget</zorder>
    <zorder>serial_portList</zorder>
-   <zorder>label_log</zorder>
-   <zorder>LOG</zorder>
-   <zorder>label</zorder>
-   <zorder>textBrowser</zorder>
-   <zorder>log_label</zorder>
-   <zorder>LOG</zorder>
-   <zorder>input_comPort</zorder>
    <zorder>button_connect</zorder>
    <zorder>button_disconnet</zorder>
    <zorder>button_scan</zorder>
@@ -236,8 +230,8 @@
    <slot>button_connectClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>87</x>
-     <y>180</y>
+     <x>350</x>
+     <y>55</y>
     </hint>
     <hint type="destinationlabel">
      <x>184</x>
@@ -252,8 +246,8 @@
    <slot>button_disconnectClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>77</x>
-     <y>213</y>
+     <x>460</x>
+     <y>55</y>
     </hint>
     <hint type="destinationlabel">
      <x>181</x>
@@ -268,12 +262,28 @@
    <slot>dropbox_serial_portList(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>537</x>
-     <y>102</y>
+     <x>340</x>
+     <y>54</y>
     </hint>
     <hint type="destinationlabel">
      <x>536</x>
      <y>155</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_scan</sender>
+   <signal>clicked()</signal>
+   <receiver>BluetoothGUIClass</receiver>
+   <slot>button_scanClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>32</x>
+     <y>129</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>35</x>
+     <y>145</y>
     </hint>
    </hints>
   </connection>
@@ -282,5 +292,6 @@
   <slot>button_connectClicked()</slot>
   <slot>button_disconnectClicked()</slot>
   <slot>dropbox_serial_portList(int)</slot>
+  <slot>button_scanClicked()</slot>
  </slots>
 </ui>

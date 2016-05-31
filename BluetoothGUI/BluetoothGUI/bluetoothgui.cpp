@@ -3,18 +3,19 @@
 #include <QtCore>
 #include <QString>
 #include <QtGui>
-using namespace std;
+using std::find;
+using namespace Qt;
 
 
 BluetoothGUI::BluetoothGUI(QWidget *parent)
-	: QMainWindow(parent)
+	: QMainWindow(parent),bled_connectionSatus(false)
 {
 	ui.setupUi(this);
 }
 
 BluetoothGUI::~BluetoothGUI()
 {
-	delete bled;
+	
 }
 
 /* This method gets called any time the user presses the connect button */
@@ -24,44 +25,38 @@ void BluetoothGUI::button_connectClicked()
 	QString input = ui.serial_portList->currentText();
 	ui.LOG->setText("Current text is: " + input);
 	if (input == "Select a device"){
-		ui.LOG->append("User selsected 'Select a device'"); } // do nothing  Might add a  message to the user if this happens
+		ui.LOG->append("User selsected 'Select a device'");  // do nothing, user did not select device Might add a  message to the user if this happens
+	}
 	else {
-		// now we need to open the COM port they selected
-		for (QVector<QSerialPortInfo>::iterator it = serialList.begin(); it != serialList.end(); it++) {
+		// check if we alreay are connected
+		if (!bled_connectionSatus) {
+			// not conbected, need to open COM port user selected
+			for (QVector<QSerialPortInfo>::iterator it = serialList.begin(); it != serialList.end(); it++) {
 
-			// format of the string should be "PortName: Description
-			// i.e. COM12: Bluegigia
-			if (input == (*it).portName() + ": " + (*it).description()) {
-				if (openCOM(*it)) {
-					ui.LOG->append("Success! opened: " + (*it).portName() + ": " + (*it).description());
+				// format of the string should be "PortName: Description
+				// i.e. COM12: Bluegigia
+				if (input == (*it).portName() + ": " + (*it).description()) {
+					bled112 = new BLED112();
+					bledThread = new QThread();
 
-					// need to create the BLED112 object and pass the serial port
-					//bled = new BLE112(serial_bled112);
+					setupConnections();					// this method will setup the signals and slots used to connect the threads 
+
+					bled112->doSetup(bledThread, *it);		// setup the values inside bled112 object
+					bled112->moveToThread(bledThread);		// move object to run in the thread
+					bledThread->start();						// begin thread
+
+					break;
 				}
-				else {
-					ui.LOG->append("Error: Could not open: " + (*it).portName() + ": " + (*it).description());
-				}
-				break;
-			}
-			
+			} // end of for loop
 		}
+		else {
+			ui.LOG->append("Already connected!");
+		}
+		
+		
+	} // end of else
 
-	}
-	/* OLD METHOD 
-	// Display to Log window for debugging purposes
-	ui.LOG->setText("Inside button_connectClicked()");
-
-	// Grab user input,  QString needs to be conveerted
-	if (openCOM(ui.input_comPort->text().toInt())) {
-		ui.LOG->append("Connected!");
-	}
-	else {
-		ui.LOG->append("Error: Coulnd not connect");
-	}
-
-	bled = BLE112(ui.input_comPort->text().toInt());
-	*/
-}
+} // end of button_connectClicked()
 
 /* 
 	This method is invoked when the user clicks the disconect button
@@ -69,69 +64,72 @@ void BluetoothGUI::button_connectClicked()
 */
 void BluetoothGUI::button_disconnectClicked()
 {
-	try {
-		serial_bled112->close();
-		ui.LOG->append("Closed Serial port");
+	// check make sure we have a connection to close
+	if (bled_connectionSatus) {
+		// connected to a device need to close
 		ui.button_connect->setText("Attach");
 		ui.button_connect->setStyleSheet("QPushButton#button_connect{background-color: light grey}");
 
-	}catch(...){
-		ui.LOG->append("Error in button_disconnectClicked(): Cannot close serial port");
-	}
-	/* OLD METHOD 
-	// Check make sure that handle is valid, meaning it is open
-	if (bled112 != INVALID_HANDLE_VALUE) {
-		// need to close the handle
-		if (CloseHandle(bled112)) {
-			ui.LOG->setText("Success!");
+		// update background thread
+		emit disconnect();
+		bled_connectionSatus = false;
+		
+		while (!bledThread->isFinished()) {
+			qDebug() << "Thread still running";
 		}
-		else {
-			// log the error that occured *** Need to use QString::number() to convert the DWORD returned byt GetLastError()
-			ui.LOG->setText(QString::number(GetLastError()));
-		}
+		// delete pointers
+		delete bled112;
+		delete bledThread;
+
 	}
-	*/
+	else ui.LOG->append("Not connected to a device");
+	
 }
 
-/*
-	This method will open up the serial port to talk to the BLED112
-	it will return true if succesful otherwise false
-*/
-bool BluetoothGUI::openCOM(const QSerialPortInfo &info)
-{
-	ui.LOG->append("openCOM");
-
-	serial_bled112->setPort(info);
-	if ((*serial_bled112).open(QIODevice::ReadWrite)) {
-		// if it is succesful tell the user by changing the button green
-		ui.button_connect->setStyleSheet("QPushButton#button_connect{background-color: green}");
-		ui.button_connect->setText("Attatched!");
-		return true;
-	}
+void BluetoothGUI::button_scanClicked() {
+	// first make sure that we are connected to a BLED112 device
+	if (!bled_connectionSatus)
+		ui.LOG->append("Unavailable to scan, please connect to a device first");
 	else {
-		ui.button_connect->setStyleSheet("QPushButton#button_connect{background-color: red}");
-		return false;
+		ui.LOG->append("Unavailable to scan, please connect to a device first");
+		emit scanBLE();
 	}
 	
-	/* OLD METHOD 
-	// Hard coded the port in for now for testing, will need to change 
-	char str[80];
-	int port = 12;
-	snprintf(str, sizeof(str) - 1, "\\\\.\\COM%d", port);
-	bled112 = CreateFileA(str,
-		GENERIC_READ | GENERIC_WRITE,
-		FILE_SHARE_READ | FILE_SHARE_WRITE,
-		NULL,
-		OPEN_EXISTING,
-		0,
-		NULL);
+}
 
-	//  Check if an error occured and return false 
-	if (bled112 == INVALID_HANDLE_VALUE) {
-		return false;
+	
+/* This method is used to accept the signal from the BLED112 running in background
+	when the LOG UI element needs updated this function handles it */
+void BluetoothGUI::onUpdateLOG(QString msg)
+{
+	ui.LOG->append("BLED112 Thread: " + msg);
+}
+
+/* This is the slot used to accept the signal from the BLED112 running in background
+it gets called when emit(signal, onConnect(arg)) is called from the
+background thread */
+void BluetoothGUI::onConnect(bool status)
+{
+	if (status) {
+		// true 
+		bled_connectionSatus = true;
+		 
+		// tell the user by setting the background color to green, and change text to say attatched
+		ui.button_connect->setStyleSheet("QPushButton#button_connect{background-color: green}");
+		ui.button_connect->setText("Attatched!");
 	}
-	return true;
-	*/
+	else {
+		// could not connect to device tell user
+		ui.button_connect->setStyleSheet("QPushButton#button_connect{background-color: red}");
+		ui.button_connect->setText("Retry!");
+
+		while (!bledThread->isFinished()) {
+			qDebug() << "Thread still running";
+		}
+		// delete pointers
+		delete bled112;
+		delete bledThread;
+	}
 }
 
 void BluetoothGUI::dropbox_serial_portList(int a)
@@ -164,6 +162,18 @@ bool BluetoothGUI::checkList(const QSerialPortInfo& elem)
 	}
 
 	return false;
+}
+
+
+/* This method will setup the signals and slots between the main UI thread and background thread */
+void BluetoothGUI::setupConnections()
+{
+	ui.LOG->append("Inside setupConnections");
+	// setup the signals to listen for from BLE112 object
+	connect(bled112, SIGNAL(connectBLED(bool)),  this,    SLOT(onConnect(bool)));								// signal emitted when opening serial port, response handled by BluetoothGUI in onConnect
+	connect(this,    SIGNAL(disconnect()),       bled112, SLOT(onDisconnect()),       DirectConnection);					// signnal emitted when usere presses disonnect, response handled by BLED112 in onDisconcet
+	connect(bled112, SIGNAL(updateLOG(QString)), this,    SLOT(onUpdateLOG(QString)), DirectConnection);
+	connect(this,	 SIGNAL(scanBLE()),          bled112, SLOT(onScan()),             DirectConnection);
 }
 
 

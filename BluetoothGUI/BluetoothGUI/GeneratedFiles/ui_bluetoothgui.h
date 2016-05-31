@@ -45,7 +45,7 @@ public:
     QPushButton *button_disconnet;
     QPushButton *button_scan;
     QTextBrowser *textBrowser;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_2;
     QLabel *log_label;
     QTextBrowser *LOG;
@@ -103,15 +103,15 @@ public:
         textBrowser = new QTextBrowser(centralWidget);
         textBrowser->setObjectName(QStringLiteral("textBrowser"));
         textBrowser->setGeometry(QRect(210, 30, 541, 301));
-        widget = new QWidget(centralWidget);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(10, 340, 761, 121));
-        verticalLayout_2 = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(centralWidget);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 340, 761, 121));
+        verticalLayout_2 = new QVBoxLayout(layoutWidget);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        log_label = new QLabel(widget);
+        log_label = new QLabel(layoutWidget);
         log_label->setObjectName(QStringLiteral("log_label"));
         QFont font;
         font.setFamily(QStringLiteral("Arial"));
@@ -123,20 +123,16 @@ public:
 
         verticalLayout_2->addWidget(log_label);
 
-        LOG = new QTextBrowser(widget);
+        LOG = new QTextBrowser(layoutWidget);
         LOG->setObjectName(QStringLiteral("LOG"));
 
         verticalLayout_2->addWidget(LOG);
 
         BluetoothGUIClass->setCentralWidget(centralWidget);
+        layoutWidget->raise();
         label_scan->raise();
         horizontalLayoutWidget->raise();
         serial_portList->raise();
-        LOG->raise();
-        textBrowser->raise();
-        log_label->raise();
-        LOG->raise();
-        input_comPort->raise();
         button_connect->raise();
         button_disconnet->raise();
         button_scan->raise();
@@ -165,6 +161,7 @@ public:
         QObject::connect(button_connect, SIGNAL(clicked()), BluetoothGUIClass, SLOT(button_connectClicked()));
         QObject::connect(button_disconnet, SIGNAL(clicked()), BluetoothGUIClass, SLOT(button_disconnectClicked()));
         QObject::connect(serial_portList, SIGNAL(highlighted(int)), BluetoothGUIClass, SLOT(dropbox_serial_portList(int)));
+        QObject::connect(button_scan, SIGNAL(clicked()), BluetoothGUIClass, SLOT(button_scanClicked()));
 
         QMetaObject::connectSlotsByName(BluetoothGUIClass);
     } // setupUi
@@ -179,8 +176,8 @@ public:
         serial_portList->insertItems(0, QStringList()
          << QApplication::translate("BluetoothGUIClass", "Select a device", 0)
         );
-        button_connect->setText(QApplication::translate("BluetoothGUIClass", "Connect", 0));
-        button_disconnet->setText(QApplication::translate("BluetoothGUIClass", "Disconnect", 0));
+        button_connect->setText(QApplication::translate("BluetoothGUIClass", "Attach", 0));
+        button_disconnet->setText(QApplication::translate("BluetoothGUIClass", "Detatch", 0));
         button_scan->setText(QApplication::translate("BluetoothGUIClass", "Scan", 0));
         log_label->setText(QApplication::translate("BluetoothGUIClass", "Log", 0));
         menuFile->setTitle(QApplication::translate("BluetoothGUIClass", "File", 0));

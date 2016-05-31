@@ -56,11 +56,14 @@
     <ClCompile Include="cmd_def.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BLE112.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BLED112.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_BLED112.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_BLED112.cpp">
+      <Filter>Generated Files\Release</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,9 +72,6 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_bluetoothgui.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BLED112.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cmd_def.h">
       <Filter>Header Files</Filter>
@@ -89,6 +89,9 @@
     </CustomBuild>
     <CustomBuild Include="bluetoothgui.qrc">
       <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="BLED112.h">
+      <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
