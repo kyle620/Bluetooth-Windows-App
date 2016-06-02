@@ -23,7 +23,7 @@ void output(uint8 len1, uint8* data1, uint16 len2, uint8* data2)
 		NULL
 	))
 	{
-		qDebug() << "ERROR: Writing data. %d\n", (int)GetLastError();
+		qDebug() << "ERROR: Writing data: " << QString::number((int)GetLastError());
 	}
 
 	if (!WriteFile(bled112,
@@ -33,7 +33,7 @@ void output(uint8 len1, uint8* data1, uint16 len2, uint8* data2)
 		NULL
 	))
 	{
-		qDebug() << "ERROR: Writing data. %d\n", (int)GetLastError();
+		qDebug() << "ERROR: Writing data: " << QString::number((int)GetLastError());
 	}
 } // end of output
 
@@ -150,7 +150,7 @@ int BLED112::readMessage() {
 	apimsg = ble_get_msg_hdr(apihdr);
 	if (!apimsg)
 	{
-		qDebug() << "ERROR: Message not found:%d:%d\n", (int)apihdr.cls, (int)apihdr.command;
+		qDebug() << "ERROR: Message not found: " << QString::number((int)apihdr.cls) << " " << QString::number((int)apihdr.command);
 		return -1;
 	}
 	apimsg->handler(data);

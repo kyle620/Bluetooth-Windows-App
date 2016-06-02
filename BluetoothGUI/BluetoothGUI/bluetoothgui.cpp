@@ -75,7 +75,7 @@ void BluetoothGUI::button_disconnectClicked()
 		bled_connectionSatus = false;
 		
 		while (!bledThread->isFinished()) {
-			qDebug() << "Thread still running";
+			//qDebug() << "Thread still running";
 		}
 		// delete pointers
 		delete bled112;
@@ -124,7 +124,7 @@ void BluetoothGUI::onConnect(bool status)
 		ui.button_connect->setText("Retry!");
 
 		while (!bledThread->isFinished()) {
-			qDebug() << "Thread still running";
+			//qDebug() << "Thread still running";
 		}
 		// delete pointers
 		delete bled112;
