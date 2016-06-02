@@ -55,7 +55,7 @@ extern "C" {
 #endif
 #endif
 	struct ble_cmd_packet;
-	typedef void(*ble_cmd_handler)(const void*);
+	typedef void(*ble_cmd_handler)(const void*);		// can add additional parameters for handle(arg,...,...)
 	struct ble_header
 	{
 		uint8  type_hilen;
@@ -2300,663 +2300,662 @@ extern "C" {
 		};
 
 	}ALIGNED);
-	/**Reset device**/
+
+	 /**Reset device**/
 #define ble_cmd_system_reset(boot_in_dfu) ble_send_message (ble_cmd_system_reset_idx,boot_in_dfu)
-	/**Hello - command for testing**/
+	 /**Hello - command for testing**/
 #define ble_cmd_system_hello() ble_send_message (ble_cmd_system_hello_idx)
-	/**Get device bluetooth address**/
+	 /**Get device bluetooth address**/
 #define ble_cmd_system_address_get() ble_send_message (ble_cmd_system_address_get_idx)
-	/**write register**/
+	 /**write register**/
 #define ble_cmd_system_reg_write(address,value) ble_send_message (ble_cmd_system_reg_write_idx,address,value)
-	/**read register**/
+	 /**read register**/
 #define ble_cmd_system_reg_read(address) ble_send_message (ble_cmd_system_reg_read_idx,address)
-	/**get and reset packet counters**/
+	 /**get and reset packet counters**/
 #define ble_cmd_system_get_counters() ble_send_message (ble_cmd_system_get_counters_idx)
-	/**Get status from all connections**/
+	 /**Get status from all connections**/
 #define ble_cmd_system_get_connections() ble_send_message (ble_cmd_system_get_connections_idx)
-	/**Read Memory**/
+	 /**Read Memory**/
 #define ble_cmd_system_read_memory(address,length) ble_send_message (ble_cmd_system_read_memory_idx,address,length)
-	/**Get Device info**/
+	 /**Get Device info**/
 #define ble_cmd_system_get_info() ble_send_message (ble_cmd_system_get_info_idx)
-	/**Send data to endpoint, error is returned if endpoint does not have enough space**/
+	 /**Send data to endpoint, error is returned if endpoint does not have enough space**/
 #define ble_cmd_system_endpoint_tx(endpoint,data_len,data_data) ble_send_message (ble_cmd_system_endpoint_tx_idx,endpoint,data_len,data_data)
-	/**Add entry to whitelist**/
+	 /**Add entry to whitelist**/
 #define ble_cmd_system_whitelist_append(address,address_type) ble_send_message (ble_cmd_system_whitelist_append_idx,address,address_type)
-	/**Remove entry from whitelist**/
+	 /**Remove entry from whitelist**/
 #define ble_cmd_system_whitelist_remove(address,address_type) ble_send_message (ble_cmd_system_whitelist_remove_idx,address,address_type)
-	/**Add entry to whitelist**/
+	 /**Add entry to whitelist**/
 #define ble_cmd_system_whitelist_clear() ble_send_message (ble_cmd_system_whitelist_clear_idx)
-	/**Read data from endpoint, error is returned if endpoint does not have enough data.**/
+	 /**Read data from endpoint, error is returned if endpoint does not have enough data.**/
 #define ble_cmd_system_endpoint_rx(endpoint,size) ble_send_message (ble_cmd_system_endpoint_rx_idx,endpoint,size)
-	/**Set watermarks on both input and output side**/
+	 /**Set watermarks on both input and output side**/
 #define ble_cmd_system_endpoint_set_watermarks(endpoint,rx,tx) ble_send_message (ble_cmd_system_endpoint_set_watermarks_idx,endpoint,rx,tx)
-	/**Set encryption key that will be used with aes_encrypt and aes_decrypt commands.**/
+	 /**Set encryption key that will be used with aes_encrypt and aes_decrypt commands.**/
 #define ble_cmd_system_aes_setkey(key_len,key_data) ble_send_message (ble_cmd_system_aes_setkey_idx,key_len,key_data)
-	/**Encrypt one block of data**/
+	 /**Encrypt one block of data**/
 #define ble_cmd_system_aes_encrypt(data_len,data_data) ble_send_message (ble_cmd_system_aes_encrypt_idx,data_len,data_data)
-	/**Decrypt one block of data**/
+	 /**Decrypt one block of data**/
 #define ble_cmd_system_aes_decrypt(data_len,data_data) ble_send_message (ble_cmd_system_aes_decrypt_idx,data_len,data_data)
-	/**Defragment persistent store**/
+	 /**Defragment persistent store**/
 #define ble_cmd_flash_ps_defrag() ble_send_message (ble_cmd_flash_ps_defrag_idx)
-	/**Dump all ps keys**/
+	 /**Dump all ps keys**/
 #define ble_cmd_flash_ps_dump() ble_send_message (ble_cmd_flash_ps_dump_idx)
-	/**erase all ps keys**/
+	 /**erase all ps keys**/
 #define ble_cmd_flash_ps_erase_all() ble_send_message (ble_cmd_flash_ps_erase_all_idx)
-	/**save ps key**/
+	 /**save ps key**/
 #define ble_cmd_flash_ps_save(key,value_len,value_data) ble_send_message (ble_cmd_flash_ps_save_idx,key,value_len,value_data)
-	/**load ps key**/
+	 /**load ps key**/
 #define ble_cmd_flash_ps_load(key) ble_send_message (ble_cmd_flash_ps_load_idx,key)
-	/**erase ps key**/
+	 /**erase ps key**/
 #define ble_cmd_flash_ps_erase(key) ble_send_message (ble_cmd_flash_ps_erase_idx,key)
-	/**erase flash page**/
+	 /**erase flash page**/
 #define ble_cmd_flash_erase_page(page) ble_send_message (ble_cmd_flash_erase_page_idx,page)
-	/**write data to user data area**/
+	 /**write data to user data area**/
 #define ble_cmd_flash_write_data(address,data_len,data_data) ble_send_message (ble_cmd_flash_write_data_idx,address,data_len,data_data)
-	/**read data from user data area.**/
+	 /**read data from user data area.**/
 #define ble_cmd_flash_read_data(address,length) ble_send_message (ble_cmd_flash_read_data_idx,address,length)
-	/**Write to attribute database**/
+	 /**Write to attribute database**/
 #define ble_cmd_attributes_write(handle,offset,value_len,value_data) ble_send_message (ble_cmd_attributes_write_idx,handle,offset,value_len,value_data)
-	/**Read from attribute database**/
+	 /**Read from attribute database**/
 #define ble_cmd_attributes_read(handle,offset) ble_send_message (ble_cmd_attributes_read_idx,handle,offset)
-	/**Read attribute type from database**/
+	 /**Read attribute type from database**/
 #define ble_cmd_attributes_read_type(handle) ble_send_message (ble_cmd_attributes_read_type_idx,handle)
-	/**Respond to user attribute read request**/
+	 /**Respond to user attribute read request**/
 #define ble_cmd_attributes_user_read_response(connection,att_error,value_len,value_data) ble_send_message (ble_cmd_attributes_user_read_response_idx,connection,att_error,value_len,value_data)
-	/**Response to attribute_changed event where reason is user-attribute write.**/
+	 /**Response to attribute_changed event where reason is user-attribute write.**/
 #define ble_cmd_attributes_user_write_response(connection,att_error) ble_send_message (ble_cmd_attributes_user_write_response_idx,connection,att_error)
-	/**Send notification or indication to remote device.**/
+	 /**Send notification or indication to remote device.**/
 #define ble_cmd_attributes_send(connection,handle,value_len,value_data) ble_send_message (ble_cmd_attributes_send_idx,connection,handle,value_len,value_data)
-	/**Disconnect connection, starts a disconnection procedure on connection**/
+	 /**Disconnect connection, starts a disconnection procedure on connection**/
 #define ble_cmd_connection_disconnect(connection) ble_send_message (ble_cmd_connection_disconnect_idx,connection)
-	/**Get Link RSSI**/
+	 /**Get Link RSSI**/
 #define ble_cmd_connection_get_rssi(connection) ble_send_message (ble_cmd_connection_get_rssi_idx,connection)
-	/**Update connection parameters**/
+	 /**Update connection parameters**/
 #define ble_cmd_connection_update(connection,interval_min,interval_max,latency,timeout) ble_send_message (ble_cmd_connection_update_idx,connection,interval_min,interval_max,latency,timeout)
-	/**Request version exchange**/
+	 /**Request version exchange**/
 #define ble_cmd_connection_version_update(connection) ble_send_message (ble_cmd_connection_version_update_idx,connection)
-	/**Get Current channel map**/
+	 /**Get Current channel map**/
 #define ble_cmd_connection_channel_map_get(connection) ble_send_message (ble_cmd_connection_channel_map_get_idx,connection)
-	/**Set Channel map**/
+	 /**Set Channel map**/
 #define ble_cmd_connection_channel_map_set(connection,map_len,map_data) ble_send_message (ble_cmd_connection_channel_map_set_idx,connection,map_len,map_data)
-	/**Remote feature request**/
+	 /**Remote feature request**/
 #define ble_cmd_connection_features_get(connection) ble_send_message (ble_cmd_connection_features_get_idx,connection)
-	/**Get Connection Status Parameters**/
+	 /**Get Connection Status Parameters**/
 #define ble_cmd_connection_get_status(connection) ble_send_message (ble_cmd_connection_get_status_idx,connection)
-	/**Raw TX**/
+	 /**Raw TX**/
 #define ble_cmd_connection_raw_tx(connection,data_len,data_data) ble_send_message (ble_cmd_connection_raw_tx_idx,connection,data_len,data_data)
-	/**Discover attributes by type and value**/
+	 /**Discover attributes by type and value**/
 #define ble_cmd_attclient_find_by_type_value(connection,start,end,uuid,value_len,value_data) ble_send_message (ble_cmd_attclient_find_by_type_value_idx,connection,start,end,uuid,value_len,value_data)
-	/**Discover attributes by type and value**/
+	 /**Discover attributes by type and value**/
 #define ble_cmd_attclient_read_by_group_type(connection,start,end,uuid_len,uuid_data) ble_send_message (ble_cmd_attclient_read_by_group_type_idx,connection,start,end,uuid_len,uuid_data)
-	/**Read all attributes where type matches**/
+	 /**Read all attributes where type matches**/
 #define ble_cmd_attclient_read_by_type(connection,start,end,uuid_len,uuid_data) ble_send_message (ble_cmd_attclient_read_by_type_idx,connection,start,end,uuid_len,uuid_data)
-	/**Discover Attribute handle and type mappings**/
+	 /**Discover Attribute handle and type mappings**/
 #define ble_cmd_attclient_find_information(connection,start,end) ble_send_message (ble_cmd_attclient_find_information_idx,connection,start,end)
-	/**Read Characteristic value using handle**/
+	 /**Read Characteristic value using handle**/
 #define ble_cmd_attclient_read_by_handle(connection,chrhandle) ble_send_message (ble_cmd_attclient_read_by_handle_idx,connection,chrhandle)
-	/**write data to attribute**/
+	 /**write data to attribute**/
 #define ble_cmd_attclient_attribute_write(connection,atthandle,data_len,data_data) ble_send_message (ble_cmd_attclient_attribute_write_idx,connection,atthandle,data_len,data_data)
-	/**write data to attribute using ATT write command**/
+	 /**write data to attribute using ATT write command**/
 #define ble_cmd_attclient_write_command(connection,atthandle,data_len,data_data) ble_send_message (ble_cmd_attclient_write_command_idx,connection,atthandle,data_len,data_data)
-	/**Send confirmation for received indication, use only if manual indications are enabled**/
+	 /**Send confirmation for received indication, use only if manual indications are enabled**/
 #define ble_cmd_attclient_indicate_confirm(connection) ble_send_message (ble_cmd_attclient_indicate_confirm_idx,connection)
-	/**Read Long Characteristic value**/
+	 /**Read Long Characteristic value**/
 #define ble_cmd_attclient_read_long(connection,chrhandle) ble_send_message (ble_cmd_attclient_read_long_idx,connection,chrhandle)
-	/**Send prepare write request to remote host**/
+	 /**Send prepare write request to remote host**/
 #define ble_cmd_attclient_prepare_write(connection,atthandle,offset,data_len,data_data) ble_send_message (ble_cmd_attclient_prepare_write_idx,connection,atthandle,offset,data_len,data_data)
-	/**Send prepare write request to remote host**/
+	 /**Send prepare write request to remote host**/
 #define ble_cmd_attclient_execute_write(connection,commit) ble_send_message (ble_cmd_attclient_execute_write_idx,connection,commit)
-	/**Read multiple attributes from server**/
+	 /**Read multiple attributes from server**/
 #define ble_cmd_attclient_read_multiple(connection,handles_len,handles_data) ble_send_message (ble_cmd_attclient_read_multiple_idx,connection,handles_len,handles_data)
-	/**Enable encryption on link**/
+	 /**Enable encryption on link**/
 #define ble_cmd_sm_encrypt_start(handle,bonding) ble_send_message (ble_cmd_sm_encrypt_start_idx,handle,bonding)
-	/**Set device to bondable mode**/
+	 /**Set device to bondable mode**/
 #define ble_cmd_sm_set_bondable_mode(bondable) ble_send_message (ble_cmd_sm_set_bondable_mode_idx,bondable)
-	/**delete bonding information from ps store**/
+	 /**delete bonding information from ps store**/
 #define ble_cmd_sm_delete_bonding(handle) ble_send_message (ble_cmd_sm_delete_bonding_idx,handle)
-	/**set pairing requirements**/
+	 /**set pairing requirements**/
 #define ble_cmd_sm_set_parameters(mitm,min_key_size,io_capabilities) ble_send_message (ble_cmd_sm_set_parameters_idx,mitm,min_key_size,io_capabilities)
-	/**Passkey entered**/
+	 /**Passkey entered**/
 #define ble_cmd_sm_passkey_entry(handle,passkey) ble_send_message (ble_cmd_sm_passkey_entry_idx,handle,passkey)
-	/**List all bonded devices**/
+	 /**List all bonded devices**/
 #define ble_cmd_sm_get_bonds() ble_send_message (ble_cmd_sm_get_bonds_idx)
-	/**
-	Set out-of-band encryption data for device
-	Device does not allow any other kind of pairing except oob if oob data is set.
-	**/
+	 /**
+	 Set out-of-band encryption data for device
+	 Device does not allow any other kind of pairing except oob if oob data is set.
+	 **/
 #define ble_cmd_sm_set_oob_data(oob_len,oob_data) ble_send_message (ble_cmd_sm_set_oob_data_idx,oob_len,oob_data)
-	/**
-	Add all bonded devices with a known public or static address to
-	the whitelist. Previous entries in the whitelist are first
-	cleared. This command can't be used while advertising, scanning
-	or being connected.
-	**/
+	 /**
+	 Add all bonded devices with a known public or static address to
+	 the whitelist. Previous entries in the whitelist are first
+	 cleared. This command can't be used while advertising, scanning
+	 or being connected.
+	 **/
 #define ble_cmd_sm_whitelist_bonds() ble_send_message (ble_cmd_sm_whitelist_bonds_idx)
-	/**Set GAP central/peripheral privacy flags
-	**/
+	 /**Set GAP central/peripheral privacy flags
+	 **/
 #define ble_cmd_gap_set_privacy_flags(peripheral_privacy,central_privacy) ble_send_message (ble_cmd_gap_set_privacy_flags_idx,peripheral_privacy,central_privacy)
-	/**Set discoverable and connectable mode**/
+	 /**Set discoverable and connectable mode**/
 #define ble_cmd_gap_set_mode(discover,connect) ble_send_message (ble_cmd_gap_set_mode_idx,discover,connect)
-	/**start or stop discover procedure**/
+	 /**start or stop discover procedure**/
 #define ble_cmd_gap_discover(mode) ble_send_message (ble_cmd_gap_discover_idx,mode)
-	/**Direct connection**/
+	 /**Direct connection**/
 #define ble_cmd_gap_connect_direct(address,addr_type,conn_interval_min,conn_interval_max,timeout,latency) ble_send_message (ble_cmd_gap_connect_direct_idx,address,addr_type,conn_interval_min,conn_interval_max,timeout,latency)
-	/**End current GAP procedure**/
+	 /**End current GAP procedure**/
 #define ble_cmd_gap_end_procedure() ble_send_message (ble_cmd_gap_end_procedure_idx)
-	/**Connect to any device on whitelist**/
+	 /**Connect to any device on whitelist**/
 #define ble_cmd_gap_connect_selective(conn_interval_min,conn_interval_max,timeout,latency) ble_send_message (ble_cmd_gap_connect_selective_idx,conn_interval_min,conn_interval_max,timeout,latency)
-	/**Set scan and advertising filtering parameters**/
+	 /**Set scan and advertising filtering parameters**/
 #define ble_cmd_gap_set_filtering(scan_policy,adv_policy,scan_duplicate_filtering) ble_send_message (ble_cmd_gap_set_filtering_idx,scan_policy,adv_policy,scan_duplicate_filtering)
-	/**Set scan parameters**/
+	 /**Set scan parameters**/
 #define ble_cmd_gap_set_scan_parameters(scan_interval,scan_window,active) ble_send_message (ble_cmd_gap_set_scan_parameters_idx,scan_interval,scan_window,active)
-	/**Set advertising parameters**/
+	 /**Set advertising parameters**/
 #define ble_cmd_gap_set_adv_parameters(adv_interval_min,adv_interval_max,adv_channels) ble_send_message (ble_cmd_gap_set_adv_parameters_idx,adv_interval_min,adv_interval_max,adv_channels)
-	/**Set advertisement or scan response data. Use broadcast mode to advertise data**/
+	 /**Set advertisement or scan response data. Use broadcast mode to advertise data**/
 #define ble_cmd_gap_set_adv_data(set_scanrsp,adv_data_len,adv_data_data) ble_send_message (ble_cmd_gap_set_adv_data_idx,set_scanrsp,adv_data_len,adv_data_data)
-	/**Sets device to Directed Connectable Mode
-	Uses fast advertisement procedure for 1.28s after which device enters nonconnectable mode.
-	If device has valid reconnection characteristic value, it is used for connection
-	otherwise passed address and address type are used
-	**/
+	 /**Sets device to Directed Connectable Mode
+	 Uses fast advertisement procedure for 1.28s after which device enters nonconnectable mode.
+	 If device has valid reconnection characteristic value, it is used for connection
+	 otherwise passed address and address type are used
+	 **/
 #define ble_cmd_gap_set_directed_connectable_mode(address,addr_type) ble_send_message (ble_cmd_gap_set_directed_connectable_mode_idx,address,addr_type)
-	/**Configure I/O-port interrupts**/
+	 /**Configure I/O-port interrupts**/
 #define ble_cmd_hardware_io_port_config_irq(port,enable_bits,falling_edge) ble_send_message (ble_cmd_hardware_io_port_config_irq_idx,port,enable_bits,falling_edge)
-	/**Set soft timer to send events**/
+	 /**Set soft timer to send events**/
 #define ble_cmd_hardware_set_soft_timer(time,handle,single_shot) ble_send_message (ble_cmd_hardware_set_soft_timer_idx,time,handle,single_shot)
-	/**Read A/D conversion**/
+	 /**Read A/D conversion**/
 #define ble_cmd_hardware_adc_read(input,decimation,reference_selection) ble_send_message (ble_cmd_hardware_adc_read_idx,input,decimation,reference_selection)
-	/**Configure I/O-port direction**/
+	 /**Configure I/O-port direction**/
 #define ble_cmd_hardware_io_port_config_direction(port,direction) ble_send_message (ble_cmd_hardware_io_port_config_direction_idx,port,direction)
-	/**Configure I/O-port function**/
+	 /**Configure I/O-port function**/
 #define ble_cmd_hardware_io_port_config_function(port,function) ble_send_message (ble_cmd_hardware_io_port_config_function_idx,port,function)
-	/**Configure I/O-port pull-up/pull-down**/
+	 /**Configure I/O-port pull-up/pull-down**/
 #define ble_cmd_hardware_io_port_config_pull(port,tristate_mask,pull_up) ble_send_message (ble_cmd_hardware_io_port_config_pull_idx,port,tristate_mask,pull_up)
-	/**Write I/O-port**/
+	 /**Write I/O-port**/
 #define ble_cmd_hardware_io_port_write(port,mask,data) ble_send_message (ble_cmd_hardware_io_port_write_idx,port,mask,data)
-	/**Read I/O-port**/
+	 /**Read I/O-port**/
 #define ble_cmd_hardware_io_port_read(port,mask) ble_send_message (ble_cmd_hardware_io_port_read_idx,port,mask)
-	/**Configure SPI**/
+	 /**Configure SPI**/
 #define ble_cmd_hardware_spi_config(channel,polarity,phase,bit_order,baud_e,baud_m) ble_send_message (ble_cmd_hardware_spi_config_idx,channel,polarity,phase,bit_order,baud_e,baud_m)
-	/**Transfer SPI data**/
+	 /**Transfer SPI data**/
 #define ble_cmd_hardware_spi_transfer(channel,data_len,data_data) ble_send_message (ble_cmd_hardware_spi_transfer_idx,channel,data_len,data_data)
-	/**Read data from I2C bus using bit-bang in cc2540. I2C clk is in P1.7 data in P1.6. Pull-up must be enabled on pins**/
+	 /**Read data from I2C bus using bit-bang in cc2540. I2C clk is in P1.7 data in P1.6. Pull-up must be enabled on pins**/
 #define ble_cmd_hardware_i2c_read(address,stop,length) ble_send_message (ble_cmd_hardware_i2c_read_idx,address,stop,length)
-	/**Write data to I2C bus using bit-bang in cc2540. I2C clk is in P1.7 data in P1.6. Pull-up must be enabled on pins**/
+	 /**Write data to I2C bus using bit-bang in cc2540. I2C clk is in P1.7 data in P1.6. Pull-up must be enabled on pins**/
 #define ble_cmd_hardware_i2c_write(address,stop,data_len,data_data) ble_send_message (ble_cmd_hardware_i2c_write_idx,address,stop,data_len,data_data)
-	/**Set TX Power**/
+	 /**Set TX Power**/
 #define ble_cmd_hardware_set_txpower(power) ble_send_message (ble_cmd_hardware_set_txpower_idx,power)
-	/**Set comparator for timer channel**/
+	 /**Set comparator for timer channel**/
 #define ble_cmd_hardware_timer_comparator(timer,channel,mode,comparator_value) ble_send_message (ble_cmd_hardware_timer_comparator_idx,timer,channel,mode,comparator_value)
-	/**Enable I/O-port interrupts**/
+	 /**Enable I/O-port interrupts**/
 #define ble_cmd_hardware_io_port_irq_enable(port,enable_bits) ble_send_message (ble_cmd_hardware_io_port_irq_enable_idx,port,enable_bits)
-	/**Set I/O-port interrupt direction**/
+	 /**Set I/O-port interrupt direction**/
 #define ble_cmd_hardware_io_port_irq_direction(port,falling_edge) ble_send_message (ble_cmd_hardware_io_port_irq_direction_idx,port,falling_edge)
-	/**Enable or disable analog comparator**/
+	 /**Enable or disable analog comparator**/
 #define ble_cmd_hardware_analog_comparator_enable(enable) ble_send_message (ble_cmd_hardware_analog_comparator_enable_idx,enable)
-	/**Read analog comparator output**/
+	 /**Read analog comparator output**/
 #define ble_cmd_hardware_analog_comparator_read() ble_send_message (ble_cmd_hardware_analog_comparator_read_idx)
-	/**Configure analog comparator interrupt**/
+	 /**Configure analog comparator interrupt**/
 #define ble_cmd_hardware_analog_comparator_config_irq(enabled) ble_send_message (ble_cmd_hardware_analog_comparator_config_irq_idx,enabled)
-	/**Set RX Sensitivity**/
+	 /**Set RX Sensitivity**/
 #define ble_cmd_hardware_set_rxgain(gain) ble_send_message (ble_cmd_hardware_set_rxgain_idx,gain)
-	/**Enable or disable USB**/
+	 /**Enable or disable USB**/
 #define ble_cmd_hardware_usb_enable(enable) ble_send_message (ble_cmd_hardware_usb_enable_idx,enable)
-	/**Start packet transmission, send one packet at every 625us**/
+	 /**Start packet transmission, send one packet at every 625us**/
 #define ble_cmd_test_phy_tx(channel,length,type) ble_send_message (ble_cmd_test_phy_tx_idx,channel,length,type)
-	/**Start receive test**/
+	 /**Start receive test**/
 #define ble_cmd_test_phy_rx(channel) ble_send_message (ble_cmd_test_phy_rx_idx,channel)
-	/**End test, and report received packets**/
+	 /**End test, and report received packets**/
 #define ble_cmd_test_phy_end() ble_send_message (ble_cmd_test_phy_end_idx)
-	/**Reset test**/
+	 /**Reset test**/
 #define ble_cmd_test_phy_reset() ble_send_message (ble_cmd_test_phy_reset_idx)
-	/**Get current channel quality map**/
+	 /**Get current channel quality map**/
 #define ble_cmd_test_get_channel_map() ble_send_message (ble_cmd_test_get_channel_map_idx)
-	/**Debug command**/
+	 /**Debug command**/
 #define ble_cmd_test_debug(input_len,input_data) ble_send_message (ble_cmd_test_debug_idx,input_len,input_data)
-	/**Set channel quality measurement mode**/
+	 /**Set channel quality measurement mode**/
 #define ble_cmd_test_channel_mode(mode) ble_send_message (ble_cmd_test_channel_mode_idx,mode)
-	/**Reset system**/
+	 /**Reset system**/
 #define ble_cmd_dfu_reset(dfu) ble_send_message (ble_cmd_dfu_reset_idx,dfu)
-	/**set address for flashing**/
+	 /**set address for flashing**/
 #define ble_cmd_dfu_flash_set_address(address) ble_send_message (ble_cmd_dfu_flash_set_address_idx,address)
-	/**Upload binary for flashing. Address will be updated automatically.**/
+	 /**Upload binary for flashing. Address will be updated automatically.**/
 #define ble_cmd_dfu_flash_upload(data_len,data_data) ble_send_message (ble_cmd_dfu_flash_upload_idx,data_len,data_data)
-	/**Uploading is finished.**/
+	 /**Uploading is finished.**/
 #define ble_cmd_dfu_flash_upload_finish() ble_send_message (ble_cmd_dfu_flash_upload_finish_idx)
-	/**Reset device**/
-	void ble_rsp_system_reset(const void *nul);
+	 /**Reset device**/
+	 void ble_rsp_system_reset(const void *nul);
 
-	/**Hello - command for testing**/
-	void ble_rsp_system_hello(const void *nul);
+	 /**Hello - command for testing**/
+	 void ble_rsp_system_hello(const void *nul);
 
-	/**Get device bluetooth address**/
-	void ble_rsp_system_address_get(const struct ble_msg_system_address_get_rsp_t *msg);
+	 /**Get device bluetooth address**/
+	 void ble_rsp_system_address_get(const struct ble_msg_system_address_get_rsp_t *msg);
 
-	/**write register**/
-	void ble_rsp_system_reg_write(const struct ble_msg_system_reg_write_rsp_t *msg);
+	 /**write register**/
+	 void ble_rsp_system_reg_write(const struct ble_msg_system_reg_write_rsp_t *msg);
 
-	/**read register**/
-	void ble_rsp_system_reg_read(const struct ble_msg_system_reg_read_rsp_t *msg);
+	 /**read register**/
+	 void ble_rsp_system_reg_read(const struct ble_msg_system_reg_read_rsp_t *msg);
 
-	/**get and reset packet counters**/
-	void ble_rsp_system_get_counters(const struct ble_msg_system_get_counters_rsp_t *msg);
+	 /**get and reset packet counters**/
+	 void ble_rsp_system_get_counters(const struct ble_msg_system_get_counters_rsp_t *msg);
 
-	/**Get status from all connections**/
-	void ble_rsp_system_get_connections(const struct ble_msg_system_get_connections_rsp_t *msg);
+	 /**Get status from all connections**/
+	 void ble_rsp_system_get_connections(const struct ble_msg_system_get_connections_rsp_t *msg);
 
-	/**Read Memory**/
-	void ble_rsp_system_read_memory(const struct ble_msg_system_read_memory_rsp_t *msg);
+	 /**Read Memory**/
+	 void ble_rsp_system_read_memory(const struct ble_msg_system_read_memory_rsp_t *msg);
 
-	/**Get Device info**/
-	void ble_rsp_system_get_info(const struct ble_msg_system_get_info_rsp_t *msg);
+	 /**Get Device info**/
+	 void ble_rsp_system_get_info(const struct ble_msg_system_get_info_rsp_t *msg);
 
-	/**Send data to endpoint, error is returned if endpoint does not have enough space**/
-	void ble_rsp_system_endpoint_tx(const struct ble_msg_system_endpoint_tx_rsp_t *msg);
+	 /**Send data to endpoint, error is returned if endpoint does not have enough space**/
+	 void ble_rsp_system_endpoint_tx(const struct ble_msg_system_endpoint_tx_rsp_t *msg);
 
-	/**Add entry to whitelist**/
-	void ble_rsp_system_whitelist_append(const struct ble_msg_system_whitelist_append_rsp_t *msg);
+	 /**Add entry to whitelist**/
+	 void ble_rsp_system_whitelist_append(const struct ble_msg_system_whitelist_append_rsp_t *msg);
 
-	/**Remove entry from whitelist**/
-	void ble_rsp_system_whitelist_remove(const struct ble_msg_system_whitelist_remove_rsp_t *msg);
+	 /**Remove entry from whitelist**/
+	 void ble_rsp_system_whitelist_remove(const struct ble_msg_system_whitelist_remove_rsp_t *msg);
 
-	/**Add entry to whitelist**/
-	void ble_rsp_system_whitelist_clear(const void *nul);
+	 /**Add entry to whitelist**/
+	 void ble_rsp_system_whitelist_clear(const void *nul);
 
-	/**Read data from endpoint, error is returned if endpoint does not have enough data.**/
-	void ble_rsp_system_endpoint_rx(const struct ble_msg_system_endpoint_rx_rsp_t *msg);
+	 /**Read data from endpoint, error is returned if endpoint does not have enough data.**/
+	 void ble_rsp_system_endpoint_rx(const struct ble_msg_system_endpoint_rx_rsp_t *msg);
 
-	/**Set watermarks on both input and output side**/
-	void ble_rsp_system_endpoint_set_watermarks(const struct ble_msg_system_endpoint_set_watermarks_rsp_t *msg);
+	 /**Set watermarks on both input and output side**/
+	 void ble_rsp_system_endpoint_set_watermarks(const struct ble_msg_system_endpoint_set_watermarks_rsp_t *msg);
 
-	/**Set encryption key that will be used with aes_encrypt and aes_decrypt commands.**/
-	void ble_rsp_system_aes_setkey(const void *nul);
+	 /**Set encryption key that will be used with aes_encrypt and aes_decrypt commands.**/
+	 void ble_rsp_system_aes_setkey(const void *nul);
 
-	/**Encrypt one block of data**/
-	void ble_rsp_system_aes_encrypt(const struct ble_msg_system_aes_encrypt_rsp_t *msg);
+	 /**Encrypt one block of data**/
+	 void ble_rsp_system_aes_encrypt(const struct ble_msg_system_aes_encrypt_rsp_t *msg);
 
-	/**Decrypt one block of data**/
-	void ble_rsp_system_aes_decrypt(const struct ble_msg_system_aes_decrypt_rsp_t *msg);
+	 /**Decrypt one block of data**/
+	 void ble_rsp_system_aes_decrypt(const struct ble_msg_system_aes_decrypt_rsp_t *msg);
 
-	/**Defragment persistent store**/
-	void ble_rsp_flash_ps_defrag(const void *nul);
+	 /**Defragment persistent store**/
+	 void ble_rsp_flash_ps_defrag(const void *nul);
 
-	/**Dump all ps keys**/
-	void ble_rsp_flash_ps_dump(const void *nul);
+	 /**Dump all ps keys**/
+	 void ble_rsp_flash_ps_dump(const void *nul);
 
-	/**erase all ps keys**/
-	void ble_rsp_flash_ps_erase_all(const void *nul);
+	 /**erase all ps keys**/
+	 void ble_rsp_flash_ps_erase_all(const void *nul);
 
-	/**save ps key**/
-	void ble_rsp_flash_ps_save(const struct ble_msg_flash_ps_save_rsp_t *msg);
+	 /**save ps key**/
+	 void ble_rsp_flash_ps_save(const struct ble_msg_flash_ps_save_rsp_t *msg);
 
-	/**load ps key**/
-	void ble_rsp_flash_ps_load(const struct ble_msg_flash_ps_load_rsp_t *msg);
+	 /**load ps key**/
+	 void ble_rsp_flash_ps_load(const struct ble_msg_flash_ps_load_rsp_t *msg);
 
-	/**erase ps key**/
-	void ble_rsp_flash_ps_erase(const void *nul);
+	 /**erase ps key**/
+	 void ble_rsp_flash_ps_erase(const void *nul);
 
-	/**erase flash page**/
-	void ble_rsp_flash_erase_page(const struct ble_msg_flash_erase_page_rsp_t *msg);
+	 /**erase flash page**/
+	 void ble_rsp_flash_erase_page(const struct ble_msg_flash_erase_page_rsp_t *msg);
 
-	/**write data to user data area**/
-	void ble_rsp_flash_write_data(const struct ble_msg_flash_write_data_rsp_t *msg);
+	 /**write data to user data area**/
+	 void ble_rsp_flash_write_data(const struct ble_msg_flash_write_data_rsp_t *msg);
 
-	/**read data from user data area.**/
-	void ble_rsp_flash_read_data(const struct ble_msg_flash_read_data_rsp_t *msg);
+	 /**read data from user data area.**/
+	 void ble_rsp_flash_read_data(const struct ble_msg_flash_read_data_rsp_t *msg);
 
-	/**Write to attribute database**/
-	void ble_rsp_attributes_write(const struct ble_msg_attributes_write_rsp_t *msg);
+	 /**Write to attribute database**/
+	 void ble_rsp_attributes_write(const struct ble_msg_attributes_write_rsp_t *msg);
 
-	/**Read from attribute database**/
-	void ble_rsp_attributes_read(const struct ble_msg_attributes_read_rsp_t *msg);
+	 /**Read from attribute database**/
+	 void ble_rsp_attributes_read(const struct ble_msg_attributes_read_rsp_t *msg);
 
-	/**Read attribute type from database**/
-	void ble_rsp_attributes_read_type(const struct ble_msg_attributes_read_type_rsp_t *msg);
+	 /**Read attribute type from database**/
+	 void ble_rsp_attributes_read_type(const struct ble_msg_attributes_read_type_rsp_t *msg);
 
-	/**Respond to user attribute read request**/
-	void ble_rsp_attributes_user_read_response(const void *nul);
+	 /**Respond to user attribute read request**/
+	 void ble_rsp_attributes_user_read_response(const void *nul);
 
-	/**Response to attribute_changed event where reason is user-attribute write.**/
-	void ble_rsp_attributes_user_write_response(const void *nul);
+	 /**Response to attribute_changed event where reason is user-attribute write.**/
+	 void ble_rsp_attributes_user_write_response(const void *nul);
 
-	/**Send notification or indication to remote device.**/
-	void ble_rsp_attributes_send(const struct ble_msg_attributes_send_rsp_t *msg);
+	 /**Send notification or indication to remote device.**/
+	 void ble_rsp_attributes_send(const struct ble_msg_attributes_send_rsp_t *msg);
 
-	/**Disconnect connection, starts a disconnection procedure on connection**/
-	void ble_rsp_connection_disconnect(const struct ble_msg_connection_disconnect_rsp_t *msg);
+	 /**Disconnect connection, starts a disconnection procedure on connection**/
+	 void ble_rsp_connection_disconnect(const struct ble_msg_connection_disconnect_rsp_t *msg);
 
-	/**Get Link RSSI**/
-	void ble_rsp_connection_get_rssi(const struct ble_msg_connection_get_rssi_rsp_t *msg);
+	 /**Get Link RSSI**/
+	 void ble_rsp_connection_get_rssi(const struct ble_msg_connection_get_rssi_rsp_t *msg);
 
-	/**Update connection parameters**/
-	void ble_rsp_connection_update(const struct ble_msg_connection_update_rsp_t *msg);
+	 /**Update connection parameters**/
+	 void ble_rsp_connection_update(const struct ble_msg_connection_update_rsp_t *msg);
 
-	/**Request version exchange**/
-	void ble_rsp_connection_version_update(const struct ble_msg_connection_version_update_rsp_t *msg);
+	 /**Request version exchange**/
+	 void ble_rsp_connection_version_update(const struct ble_msg_connection_version_update_rsp_t *msg);
 
-	/**Get Current channel map**/
-	void ble_rsp_connection_channel_map_get(const struct ble_msg_connection_channel_map_get_rsp_t *msg);
+	 /**Get Current channel map**/
+	 void ble_rsp_connection_channel_map_get(const struct ble_msg_connection_channel_map_get_rsp_t *msg);
 
-	/**Set Channel map**/
-	void ble_rsp_connection_channel_map_set(const struct ble_msg_connection_channel_map_set_rsp_t *msg);
+	 /**Set Channel map**/
+	 void ble_rsp_connection_channel_map_set(const struct ble_msg_connection_channel_map_set_rsp_t *msg);
 
-	/**Remote feature request**/
-	void ble_rsp_connection_features_get(const struct ble_msg_connection_features_get_rsp_t *msg);
+	 /**Remote feature request**/
+	 void ble_rsp_connection_features_get(const struct ble_msg_connection_features_get_rsp_t *msg);
 
-	/**Get Connection Status Parameters**/
-	void ble_rsp_connection_get_status(const struct ble_msg_connection_get_status_rsp_t *msg);
+	 /**Get Connection Status Parameters**/
+	 void ble_rsp_connection_get_status(const struct ble_msg_connection_get_status_rsp_t *msg);
 
-	/**Raw TX**/
-	void ble_rsp_connection_raw_tx(const struct ble_msg_connection_raw_tx_rsp_t *msg);
+	 /**Raw TX**/
+	 void ble_rsp_connection_raw_tx(const struct ble_msg_connection_raw_tx_rsp_t *msg);
 
-	/**Discover attributes by type and value**/
-	void ble_rsp_attclient_find_by_type_value(const struct ble_msg_attclient_find_by_type_value_rsp_t *msg);
+	 /**Discover attributes by type and value**/
+	 void ble_rsp_attclient_find_by_type_value(const struct ble_msg_attclient_find_by_type_value_rsp_t *msg);
 
-	/**Discover attributes by type and value**/
-	void ble_rsp_attclient_read_by_group_type(const struct ble_msg_attclient_read_by_group_type_rsp_t *msg);
+	 /**Discover attributes by type and value**/
+	 void ble_rsp_attclient_read_by_group_type(const struct ble_msg_attclient_read_by_group_type_rsp_t *msg);
 
-	/**Read all attributes where type matches**/
-	void ble_rsp_attclient_read_by_type(const struct ble_msg_attclient_read_by_type_rsp_t *msg);
+	 /**Read all attributes where type matches**/
+	 void ble_rsp_attclient_read_by_type(const struct ble_msg_attclient_read_by_type_rsp_t *msg);
 
-	/**Discover Attribute handle and type mappings**/
-	void ble_rsp_attclient_find_information(const struct ble_msg_attclient_find_information_rsp_t *msg);
+	 /**Discover Attribute handle and type mappings**/
+	 void ble_rsp_attclient_find_information(const struct ble_msg_attclient_find_information_rsp_t *msg);
 
-	/**Read Characteristic value using handle**/
-	void ble_rsp_attclient_read_by_handle(const struct ble_msg_attclient_read_by_handle_rsp_t *msg);
+	 /**Read Characteristic value using handle**/
+	 void ble_rsp_attclient_read_by_handle(const struct ble_msg_attclient_read_by_handle_rsp_t *msg);
 
-	/**write data to attribute**/
-	void ble_rsp_attclient_attribute_write(const struct ble_msg_attclient_attribute_write_rsp_t *msg);
+	 /**write data to attribute**/
+	 void ble_rsp_attclient_attribute_write(const struct ble_msg_attclient_attribute_write_rsp_t *msg);
 
-	/**write data to attribute using ATT write command**/
-	void ble_rsp_attclient_write_command(const struct ble_msg_attclient_write_command_rsp_t *msg);
+	 /**write data to attribute using ATT write command**/
+	 void ble_rsp_attclient_write_command(const struct ble_msg_attclient_write_command_rsp_t *msg);
 
-	/**Send confirmation for received indication, use only if manual indications are enabled**/
-	void ble_rsp_attclient_indicate_confirm(const struct ble_msg_attclient_indicate_confirm_rsp_t *msg);
+	 /**Send confirmation for received indication, use only if manual indications are enabled**/
+	 void ble_rsp_attclient_indicate_confirm(const struct ble_msg_attclient_indicate_confirm_rsp_t *msg);
 
-	/**Read Long Characteristic value**/
-	void ble_rsp_attclient_read_long(const struct ble_msg_attclient_read_long_rsp_t *msg);
+	 /**Read Long Characteristic value**/
+	 void ble_rsp_attclient_read_long(const struct ble_msg_attclient_read_long_rsp_t *msg);
 
-	/**Send prepare write request to remote host**/
-	void ble_rsp_attclient_prepare_write(const struct ble_msg_attclient_prepare_write_rsp_t *msg);
+	 /**Send prepare write request to remote host**/
+	 void ble_rsp_attclient_prepare_write(const struct ble_msg_attclient_prepare_write_rsp_t *msg);
 
-	/**Send prepare write request to remote host**/
-	void ble_rsp_attclient_execute_write(const struct ble_msg_attclient_execute_write_rsp_t *msg);
+	 /**Send prepare write request to remote host**/
+	 void ble_rsp_attclient_execute_write(const struct ble_msg_attclient_execute_write_rsp_t *msg);
 
-	/**Read multiple attributes from server**/
-	void ble_rsp_attclient_read_multiple(const struct ble_msg_attclient_read_multiple_rsp_t *msg);
+	 /**Read multiple attributes from server**/
+	 void ble_rsp_attclient_read_multiple(const struct ble_msg_attclient_read_multiple_rsp_t *msg);
 
-	/**Enable encryption on link**/
-	void ble_rsp_sm_encrypt_start(const struct ble_msg_sm_encrypt_start_rsp_t *msg);
+	 /**Enable encryption on link**/
+	 void ble_rsp_sm_encrypt_start(const struct ble_msg_sm_encrypt_start_rsp_t *msg);
 
-	/**Set device to bondable mode**/
-	void ble_rsp_sm_set_bondable_mode(const void *nul);
+	 /**Set device to bondable mode**/
+	 void ble_rsp_sm_set_bondable_mode(const void *nul);
 
-	/**delete bonding information from ps store**/
-	void ble_rsp_sm_delete_bonding(const struct ble_msg_sm_delete_bonding_rsp_t *msg);
+	 /**delete bonding information from ps store**/
+	 void ble_rsp_sm_delete_bonding(const struct ble_msg_sm_delete_bonding_rsp_t *msg);
 
-	/**set pairing requirements**/
-	void ble_rsp_sm_set_parameters(const void *nul);
+	 /**set pairing requirements**/
+	 void ble_rsp_sm_set_parameters(const void *nul);
 
-	/**Passkey entered**/
-	void ble_rsp_sm_passkey_entry(const struct ble_msg_sm_passkey_entry_rsp_t *msg);
+	 /**Passkey entered**/
+	 void ble_rsp_sm_passkey_entry(const struct ble_msg_sm_passkey_entry_rsp_t *msg);
 
-	/**List all bonded devices**/
-	void ble_rsp_sm_get_bonds(const struct ble_msg_sm_get_bonds_rsp_t *msg);
+	 /**List all bonded devices**/
+	 void ble_rsp_sm_get_bonds(const struct ble_msg_sm_get_bonds_rsp_t *msg);
 
-	/**
-	Set out-of-band encryption data for device
-	Device does not allow any other kind of pairing except oob if oob data is set.
-	**/
-	void ble_rsp_sm_set_oob_data(const void *nul);
+	 /**
+	 Set out-of-band encryption data for device
+	 Device does not allow any other kind of pairing except oob if oob data is set.
+	 **/
+	 void ble_rsp_sm_set_oob_data(const void *nul);
 
-	/**
-	Add all bonded devices with a known public or static address to
-	the whitelist. Previous entries in the whitelist are first
-	cleared. This command can't be used while advertising, scanning
-	or being connected.
-	**/
-	void ble_rsp_sm_whitelist_bonds(const struct ble_msg_sm_whitelist_bonds_rsp_t *msg);
+	 /**
+	 Add all bonded devices with a known public or static address to
+	 the whitelist. Previous entries in the whitelist are first
+	 cleared. This command can't be used while advertising, scanning
+	 or being connected.
+	 **/
+	 void ble_rsp_sm_whitelist_bonds(const struct ble_msg_sm_whitelist_bonds_rsp_t *msg);
 
-	/**Set GAP central/peripheral privacy flags
-	**/
-	void ble_rsp_gap_set_privacy_flags(const void *nul);
+	 /**Set GAP central/peripheral privacy flags
+	 **/
+	 void ble_rsp_gap_set_privacy_flags(const void *nul);
 
-	/**Set discoverable and connectable mode**/
-	void ble_rsp_gap_set_mode(const struct ble_msg_gap_set_mode_rsp_t *msg);
+	 /**Set discoverable and connectable mode**/
+	 void ble_rsp_gap_set_mode(const struct ble_msg_gap_set_mode_rsp_t *msg);
 
-	/**start or stop discover procedure**/
-	void ble_rsp_gap_discover(const struct ble_msg_gap_discover_rsp_t *msg);
+	 /**start or stop discover procedure**/
+	 void ble_rsp_gap_discover(const struct ble_msg_gap_discover_rsp_t *msg);
 
-	/**Direct connection**/
-	void ble_rsp_gap_connect_direct(const struct ble_msg_gap_connect_direct_rsp_t *msg);
+	 /**Direct connection**/
+	 void ble_rsp_gap_connect_direct(const struct ble_msg_gap_connect_direct_rsp_t *msg);
 
-	/**End current GAP procedure**/
-	void ble_rsp_gap_end_procedure(const struct ble_msg_gap_end_procedure_rsp_t *msg);
+	 /**End current GAP procedure**/
+	 void ble_rsp_gap_end_procedure(const struct ble_msg_gap_end_procedure_rsp_t *msg);
 
-	/**Connect to any device on whitelist**/
-	void ble_rsp_gap_connect_selective(const struct ble_msg_gap_connect_selective_rsp_t *msg);
+	 /**Connect to any device on whitelist**/
+	 void ble_rsp_gap_connect_selective(const struct ble_msg_gap_connect_selective_rsp_t *msg);
 
-	/**Set scan and advertising filtering parameters**/
-	void ble_rsp_gap_set_filtering(const struct ble_msg_gap_set_filtering_rsp_t *msg);
+	 /**Set scan and advertising filtering parameters**/
+	 void ble_rsp_gap_set_filtering(const struct ble_msg_gap_set_filtering_rsp_t *msg);
 
-	/**Set scan parameters**/
-	void ble_rsp_gap_set_scan_parameters(const struct ble_msg_gap_set_scan_parameters_rsp_t *msg);
+	 /**Set scan parameters**/
+	 void ble_rsp_gap_set_scan_parameters(const struct ble_msg_gap_set_scan_parameters_rsp_t *msg);
 
-	/**Set advertising parameters**/
-	void ble_rsp_gap_set_adv_parameters(const struct ble_msg_gap_set_adv_parameters_rsp_t *msg);
+	 /**Set advertising parameters**/
+	 void ble_rsp_gap_set_adv_parameters(const struct ble_msg_gap_set_adv_parameters_rsp_t *msg);
 
-	/**Set advertisement or scan response data. Use broadcast mode to advertise data**/
-	void ble_rsp_gap_set_adv_data(const struct ble_msg_gap_set_adv_data_rsp_t *msg);
+	 /**Set advertisement or scan response data. Use broadcast mode to advertise data**/
+	 void ble_rsp_gap_set_adv_data(const struct ble_msg_gap_set_adv_data_rsp_t *msg);
 
-	/**Sets device to Directed Connectable Mode
-	Uses fast advertisement procedure for 1.28s after which device enters nonconnectable mode.
-	If device has valid reconnection characteristic value, it is used for connection
-	otherwise passed address and address type are used
-	**/
-	void ble_rsp_gap_set_directed_connectable_mode(const struct ble_msg_gap_set_directed_connectable_mode_rsp_t *msg);
+	 /**Sets device to Directed Connectable Mode
+	 Uses fast advertisement procedure for 1.28s after which device enters nonconnectable mode.
+	 If device has valid reconnection characteristic value, it is used for connection
+	 otherwise passed address and address type are used
+	 **/
+	 void ble_rsp_gap_set_directed_connectable_mode(const struct ble_msg_gap_set_directed_connectable_mode_rsp_t *msg);
 
-	/**Configure I/O-port interrupts**/
-	void ble_rsp_hardware_io_port_config_irq(const struct ble_msg_hardware_io_port_config_irq_rsp_t *msg);
+	 /**Configure I/O-port interrupts**/
+	 void ble_rsp_hardware_io_port_config_irq(const struct ble_msg_hardware_io_port_config_irq_rsp_t *msg);
 
-	/**Set soft timer to send events**/
-	void ble_rsp_hardware_set_soft_timer(const struct ble_msg_hardware_set_soft_timer_rsp_t *msg);
+	 /**Set soft timer to send events**/
+	 void ble_rsp_hardware_set_soft_timer(const struct ble_msg_hardware_set_soft_timer_rsp_t *msg);
 
-	/**Read A/D conversion**/
-	void ble_rsp_hardware_adc_read(const struct ble_msg_hardware_adc_read_rsp_t *msg);
+	 /**Read A/D conversion**/
+	 void ble_rsp_hardware_adc_read(const struct ble_msg_hardware_adc_read_rsp_t *msg);
 
-	/**Configure I/O-port direction**/
-	void ble_rsp_hardware_io_port_config_direction(const struct ble_msg_hardware_io_port_config_direction_rsp_t *msg);
+	 /**Configure I/O-port direction**/
+	 void ble_rsp_hardware_io_port_config_direction(const struct ble_msg_hardware_io_port_config_direction_rsp_t *msg);
 
-	/**Configure I/O-port function**/
-	void ble_rsp_hardware_io_port_config_function(const struct ble_msg_hardware_io_port_config_function_rsp_t *msg);
+	 /**Configure I/O-port function**/
+	 void ble_rsp_hardware_io_port_config_function(const struct ble_msg_hardware_io_port_config_function_rsp_t *msg);
 
-	/**Configure I/O-port pull-up/pull-down**/
-	void ble_rsp_hardware_io_port_config_pull(const struct ble_msg_hardware_io_port_config_pull_rsp_t *msg);
+	 /**Configure I/O-port pull-up/pull-down**/
+	 void ble_rsp_hardware_io_port_config_pull(const struct ble_msg_hardware_io_port_config_pull_rsp_t *msg);
 
-	/**Write I/O-port**/
-	void ble_rsp_hardware_io_port_write(const struct ble_msg_hardware_io_port_write_rsp_t *msg);
+	 /**Write I/O-port**/
+	 void ble_rsp_hardware_io_port_write(const struct ble_msg_hardware_io_port_write_rsp_t *msg);
 
-	/**Read I/O-port**/
-	void ble_rsp_hardware_io_port_read(const struct ble_msg_hardware_io_port_read_rsp_t *msg);
+	 /**Read I/O-port**/
+	 void ble_rsp_hardware_io_port_read(const struct ble_msg_hardware_io_port_read_rsp_t *msg);
 
-	/**Configure SPI**/
-	void ble_rsp_hardware_spi_config(const struct ble_msg_hardware_spi_config_rsp_t *msg);
+	 /**Configure SPI**/
+	 void ble_rsp_hardware_spi_config(const struct ble_msg_hardware_spi_config_rsp_t *msg);
 
-	/**Transfer SPI data**/
-	void ble_rsp_hardware_spi_transfer(const struct ble_msg_hardware_spi_transfer_rsp_t *msg);
+	 /**Transfer SPI data**/
+	 void ble_rsp_hardware_spi_transfer(const struct ble_msg_hardware_spi_transfer_rsp_t *msg);
 
-	/**Read data from I2C bus using bit-bang in cc2540. I2C clk is in P1.7 data in P1.6. Pull-up must be enabled on pins**/
-	void ble_rsp_hardware_i2c_read(const struct ble_msg_hardware_i2c_read_rsp_t *msg);
+	 /**Read data from I2C bus using bit-bang in cc2540. I2C clk is in P1.7 data in P1.6. Pull-up must be enabled on pins**/
+	 void ble_rsp_hardware_i2c_read(const struct ble_msg_hardware_i2c_read_rsp_t *msg);
 
-	/**Write data to I2C bus using bit-bang in cc2540. I2C clk is in P1.7 data in P1.6. Pull-up must be enabled on pins**/
-	void ble_rsp_hardware_i2c_write(const struct ble_msg_hardware_i2c_write_rsp_t *msg);
+	 /**Write data to I2C bus using bit-bang in cc2540. I2C clk is in P1.7 data in P1.6. Pull-up must be enabled on pins**/
+	 void ble_rsp_hardware_i2c_write(const struct ble_msg_hardware_i2c_write_rsp_t *msg);
 
-	/**Set TX Power**/
-	void ble_rsp_hardware_set_txpower(const void *nul);
+	 /**Set TX Power**/
+	 void ble_rsp_hardware_set_txpower(const void *nul);
 
-	/**Set comparator for timer channel**/
-	void ble_rsp_hardware_timer_comparator(const struct ble_msg_hardware_timer_comparator_rsp_t *msg);
+	 /**Set comparator for timer channel**/
+	 void ble_rsp_hardware_timer_comparator(const struct ble_msg_hardware_timer_comparator_rsp_t *msg);
 
-	/**Enable I/O-port interrupts**/
-	void ble_rsp_hardware_io_port_irq_enable(const struct ble_msg_hardware_io_port_irq_enable_rsp_t *msg);
+	 /**Enable I/O-port interrupts**/
+	 void ble_rsp_hardware_io_port_irq_enable(const struct ble_msg_hardware_io_port_irq_enable_rsp_t *msg);
 
-	/**Set I/O-port interrupt direction**/
-	void ble_rsp_hardware_io_port_irq_direction(const struct ble_msg_hardware_io_port_irq_direction_rsp_t *msg);
+	 /**Set I/O-port interrupt direction**/
+	 void ble_rsp_hardware_io_port_irq_direction(const struct ble_msg_hardware_io_port_irq_direction_rsp_t *msg);
 
-	/**Enable or disable analog comparator**/
-	void ble_rsp_hardware_analog_comparator_enable(const void *nul);
+	 /**Enable or disable analog comparator**/
+	 void ble_rsp_hardware_analog_comparator_enable(const void *nul);
 
-	/**Read analog comparator output**/
-	void ble_rsp_hardware_analog_comparator_read(const struct ble_msg_hardware_analog_comparator_read_rsp_t *msg);
+	 /**Read analog comparator output**/
+	 void ble_rsp_hardware_analog_comparator_read(const struct ble_msg_hardware_analog_comparator_read_rsp_t *msg);
 
-	/**Configure analog comparator interrupt**/
-	void ble_rsp_hardware_analog_comparator_config_irq(const struct ble_msg_hardware_analog_comparator_config_irq_rsp_t *msg);
+	 /**Configure analog comparator interrupt**/
+	 void ble_rsp_hardware_analog_comparator_config_irq(const struct ble_msg_hardware_analog_comparator_config_irq_rsp_t *msg);
 
-	/**Set RX Sensitivity**/
-	void ble_rsp_hardware_set_rxgain(const void *nul);
+	 /**Set RX Sensitivity**/
+	 void ble_rsp_hardware_set_rxgain(const void *nul);
 
-	/**Enable or disable USB**/
-	void ble_rsp_hardware_usb_enable(const struct ble_msg_hardware_usb_enable_rsp_t *msg);
+	 /**Enable or disable USB**/
+	 void ble_rsp_hardware_usb_enable(const struct ble_msg_hardware_usb_enable_rsp_t *msg);
 
-	/**Start packet transmission, send one packet at every 625us**/
-	void ble_rsp_test_phy_tx(const void *nul);
+	 /**Start packet transmission, send one packet at every 625us**/
+	 void ble_rsp_test_phy_tx(const void *nul);
 
-	/**Start receive test**/
-	void ble_rsp_test_phy_rx(const void *nul);
+	 /**Start receive test**/
+	 void ble_rsp_test_phy_rx(const void *nul);
 
-	/**End test, and report received packets**/
-	void ble_rsp_test_phy_end(const struct ble_msg_test_phy_end_rsp_t *msg);
+	 /**End test, and report received packets**/
+	 void ble_rsp_test_phy_end(const struct ble_msg_test_phy_end_rsp_t *msg);
 
-	/**Reset test**/
-	void ble_rsp_test_phy_reset(const void *nul);
+	 /**Reset test**/
+	 void ble_rsp_test_phy_reset(const void *nul);
 
-	/**Get current channel quality map**/
-	void ble_rsp_test_get_channel_map(const struct ble_msg_test_get_channel_map_rsp_t *msg);
+	 /**Get current channel quality map**/
+	 void ble_rsp_test_get_channel_map(const struct ble_msg_test_get_channel_map_rsp_t *msg);
 
-	/**Debug command**/
-	void ble_rsp_test_debug(const struct ble_msg_test_debug_rsp_t *msg);
+	 /**Debug command**/
+	 void ble_rsp_test_debug(const struct ble_msg_test_debug_rsp_t *msg);
 
-	/**Set channel quality measurement mode**/
-	void ble_rsp_test_channel_mode(const void *nul);
+	 /**Set channel quality measurement mode**/
+	 void ble_rsp_test_channel_mode(const void *nul);
 
-	/**Reset system**/
-	void ble_rsp_dfu_reset(const void *nul);
+	 /**Reset system**/
+	 void ble_rsp_dfu_reset(const void *nul);
 
-	/**set address for flashing**/
-	void ble_rsp_dfu_flash_set_address(const struct ble_msg_dfu_flash_set_address_rsp_t *msg);
+	 /**set address for flashing**/
+	 void ble_rsp_dfu_flash_set_address(const struct ble_msg_dfu_flash_set_address_rsp_t *msg);
 
-	/**Upload binary for flashing. Address will be updated automatically.**/
-	void ble_rsp_dfu_flash_upload(const struct ble_msg_dfu_flash_upload_rsp_t *msg);
+	 /**Upload binary for flashing. Address will be updated automatically.**/
+	 void ble_rsp_dfu_flash_upload(const struct ble_msg_dfu_flash_upload_rsp_t *msg);
 
-	/**Uploading is finished.**/
-	void ble_rsp_dfu_flash_upload_finish(const struct ble_msg_dfu_flash_upload_finish_rsp_t *msg);
+	 /**Uploading is finished.**/
+	 void ble_rsp_dfu_flash_upload_finish(const struct ble_msg_dfu_flash_upload_finish_rsp_t *msg);
 
-	/**Device booted up, and is ready to receive commands**/
-	void ble_evt_system_boot(const struct ble_msg_system_boot_evt_t *msg);
+	 /**Device booted up, and is ready to receive commands**/
+	 void ble_evt_system_boot(const struct ble_msg_system_boot_evt_t *msg);
 
-	/**Debug data output**/
-	void ble_evt_system_debug(const struct ble_msg_system_debug_evt_t *msg);
+	 /**Debug data output**/
+	 void ble_evt_system_debug(const struct ble_msg_system_debug_evt_t *msg);
 
-	/**Endpoint receive size crossed watermark**/
-	void ble_evt_system_endpoint_watermark_rx(const struct ble_msg_system_endpoint_watermark_rx_evt_t *msg);
+	 /**Endpoint receive size crossed watermark**/
+	 void ble_evt_system_endpoint_watermark_rx(const struct ble_msg_system_endpoint_watermark_rx_evt_t *msg);
 
-	/**Endpoint transmit size crossed watermark**/
-	void ble_evt_system_endpoint_watermark_tx(const struct ble_msg_system_endpoint_watermark_tx_evt_t *msg);
+	 /**Endpoint transmit size crossed watermark**/
+	 void ble_evt_system_endpoint_watermark_tx(const struct ble_msg_system_endpoint_watermark_tx_evt_t *msg);
 
-	/**Script failure detected**/
-	void ble_evt_system_script_failure(const struct ble_msg_system_script_failure_evt_t *msg);
+	 /**Script failure detected**/
+	 void ble_evt_system_script_failure(const struct ble_msg_system_script_failure_evt_t *msg);
 
-	/**No valid license key found**/
-	void ble_evt_system_no_license_key(const void *nul);
+	 /**No valid license key found**/
+	 void ble_evt_system_no_license_key(const void *nul);
 
-	/**Protocol error in command parser**/
-	void ble_evt_system_protocol_error(const struct ble_msg_system_protocol_error_evt_t *msg);
+	 /**Protocol error in command parser**/
+	 void ble_evt_system_protocol_error(const struct ble_msg_system_protocol_error_evt_t *msg);
 
-	/**Dump key result**/
-	void ble_evt_flash_ps_key(const struct ble_msg_flash_ps_key_evt_t *msg);
+	 /**Dump key result**/
+	 void ble_evt_flash_ps_key(const struct ble_msg_flash_ps_key_evt_t *msg);
 
-	/**Attribute value has changed**/
-	void ble_evt_attributes_value(const struct ble_msg_attributes_value_evt_t *msg);
+	 /**Attribute value has changed**/
+	 void ble_evt_attributes_value(const struct ble_msg_attributes_value_evt_t *msg);
 
-	/**User-backed attribute data requested**/
-	void ble_evt_attributes_user_read_request(const struct ble_msg_attributes_user_read_request_evt_t *msg);
+	 /**User-backed attribute data requested**/
+	 void ble_evt_attributes_user_read_request(const struct ble_msg_attributes_user_read_request_evt_t *msg);
 
-	/**attribute status flags has changed**/
-	void ble_evt_attributes_status(const struct ble_msg_attributes_status_evt_t *msg);
+	 /**attribute status flags has changed**/
+	 void ble_evt_attributes_status(const struct ble_msg_attributes_status_evt_t *msg);
 
-	/**Connection opened**/
-	void ble_evt_connection_status(const struct ble_msg_connection_status_evt_t *msg);
+	 /**Connection opened**/
+	 void ble_evt_connection_status(const struct ble_msg_connection_status_evt_t *msg);
 
-	/**Remote version information**/
-	void ble_evt_connection_version_ind(const struct ble_msg_connection_version_ind_evt_t *msg);
+	 /**Remote version information**/
+	 void ble_evt_connection_version_ind(const struct ble_msg_connection_version_ind_evt_t *msg);
 
-	/**Remote feature information**/
-	void ble_evt_connection_feature_ind(const struct ble_msg_connection_feature_ind_evt_t *msg);
+	 /**Remote feature information**/
+	 void ble_evt_connection_feature_ind(const struct ble_msg_connection_feature_ind_evt_t *msg);
 
-	/**Raw RX**/
-	void ble_evt_connection_raw_rx(const struct ble_msg_connection_raw_rx_evt_t *msg);
+	 /**Raw RX**/
+	 void ble_evt_connection_raw_rx(const struct ble_msg_connection_raw_rx_evt_t *msg);
 
-	/**Link Disconnected**/
-	void ble_evt_connection_disconnected(const struct ble_msg_connection_disconnected_evt_t *msg);
+	 /**Link Disconnected**/
+	 void ble_evt_connection_disconnected(const struct ble_msg_connection_disconnected_evt_t *msg);
 
-	/**Attribute indication has been acknowledged**/
-	void ble_evt_attclient_indicated(const struct ble_msg_attclient_indicated_evt_t *msg);
+	 /**Attribute indication has been acknowledged**/
+	 void ble_evt_attclient_indicated(const struct ble_msg_attclient_indicated_evt_t *msg);
 
-	/**GATT procedure completed**/
-	void ble_evt_attclient_procedure_completed(const struct ble_msg_attclient_procedure_completed_evt_t *msg);
+	 /**GATT procedure completed**/
+	 void ble_evt_attclient_procedure_completed(const struct ble_msg_attclient_procedure_completed_evt_t *msg);
 
-	/**group discovery return**/
-	void ble_evt_attclient_group_found(const struct ble_msg_attclient_group_found_evt_t *msg);
+	 /**group discovery return**/
+	 void ble_evt_attclient_group_found(const struct ble_msg_attclient_group_found_evt_t *msg);
 
-	/**characteristics found**/
-	void ble_evt_attclient_attribute_found(const struct ble_msg_attclient_attribute_found_evt_t *msg);
+	 /**characteristics found**/
+	 void ble_evt_attclient_attribute_found(const struct ble_msg_attclient_attribute_found_evt_t *msg);
 
-	/**Handle type mapping found**/
-	void ble_evt_attclient_find_information_found(const struct ble_msg_attclient_find_information_found_evt_t *msg);
+	 /**Handle type mapping found**/
+	 void ble_evt_attclient_find_information_found(const struct ble_msg_attclient_find_information_found_evt_t *msg);
 
-	/**attribute value returned**/
-	void ble_evt_attclient_attribute_value(const struct ble_msg_attclient_attribute_value_evt_t *msg);
+	 /**attribute value returned**/
+	 void ble_evt_attclient_attribute_value(const struct ble_msg_attclient_attribute_value_evt_t *msg);
 
-	/**Response to read multiple request**/
-	void ble_evt_attclient_read_multiple_response(const struct ble_msg_attclient_read_multiple_response_evt_t *msg);
+	 /**Response to read multiple request**/
+	 void ble_evt_attclient_read_multiple_response(const struct ble_msg_attclient_read_multiple_response_evt_t *msg);
 
-	/**SMP data output**/
-	void ble_evt_sm_smp_data(const struct ble_msg_sm_smp_data_evt_t *msg);
+	 /**SMP data output**/
+	 void ble_evt_sm_smp_data(const struct ble_msg_sm_smp_data_evt_t *msg);
 
-	/**Link bonding has failed**/
-	void ble_evt_sm_bonding_fail(const struct ble_msg_sm_bonding_fail_evt_t *msg);
+	 /**Link bonding has failed**/
+	 void ble_evt_sm_bonding_fail(const struct ble_msg_sm_bonding_fail_evt_t *msg);
 
-	/**Passkey to be entered to remote device**/
-	void ble_evt_sm_passkey_display(const struct ble_msg_sm_passkey_display_evt_t *msg);
+	 /**Passkey to be entered to remote device**/
+	 void ble_evt_sm_passkey_display(const struct ble_msg_sm_passkey_display_evt_t *msg);
 
-	/**Passkey Requested**/
-	void ble_evt_sm_passkey_request(const struct ble_msg_sm_passkey_request_evt_t *msg);
+	 /**Passkey Requested**/
+	 void ble_evt_sm_passkey_request(const struct ble_msg_sm_passkey_request_evt_t *msg);
 
-	/**Bond status information**/
-	void ble_evt_sm_bond_status(const struct ble_msg_sm_bond_status_evt_t *msg);
+	 /**Bond status information**/
+	 void ble_evt_sm_bond_status(const struct ble_msg_sm_bond_status_evt_t *msg);
 
-	/**Scan Response**/
-	void ble_evt_gap_scan_response(const struct ble_msg_gap_scan_response_evt_t *msg);
+	 /**Scan Response**/
+	 void ble_evt_gap_scan_response(const struct ble_msg_gap_scan_response_evt_t *msg);
 
-	/**Not used**/
-	void ble_evt_gap_mode_changed(const struct ble_msg_gap_mode_changed_evt_t *msg);
+	 /**Not used**/
+	 void ble_evt_gap_mode_changed(const struct ble_msg_gap_mode_changed_evt_t *msg);
 
-	/**I/O-port state**/
-	void ble_evt_hardware_io_port_status(const struct ble_msg_hardware_io_port_status_evt_t *msg);
+	 /**I/O-port state**/
+	 void ble_evt_hardware_io_port_status(const struct ble_msg_hardware_io_port_status_evt_t *msg);
 
-	/**soft timer event**/
-	void ble_evt_hardware_soft_timer(const struct ble_msg_hardware_soft_timer_evt_t *msg);
+	 /**soft timer event**/
+	 void ble_evt_hardware_soft_timer(const struct ble_msg_hardware_soft_timer_evt_t *msg);
 
-	/**adc result**/
-	void ble_evt_hardware_adc_result(const struct ble_msg_hardware_adc_result_evt_t *msg);
+	 /**adc result**/
+	 void ble_evt_hardware_adc_result(const struct ble_msg_hardware_adc_result_evt_t *msg);
 
-	/**This event is produced when analog comparator output changes**/
-	void ble_evt_hardware_analog_comparator_status(const struct ble_msg_hardware_analog_comparator_status_evt_t *msg);
+	 /**This event is produced when analog comparator output changes**/
+	 void ble_evt_hardware_analog_comparator_status(const struct ble_msg_hardware_analog_comparator_status_evt_t *msg);
 
-	/**Device booted up in dfu, and is ready to receive commands**/
-	void ble_evt_dfu_boot(const struct ble_msg_dfu_boot_evt_t *msg);
-
-
+	 /**Device booted up in dfu, and is ready to receive commands**/
+	 void ble_evt_dfu_boot(const struct ble_msg_dfu_boot_evt_t *msg);
 
 	struct ble_class_handler_t
 	{
@@ -2967,6 +2966,7 @@ extern "C" {
 	extern const struct ble_class_handler_t ble_class_evt_handlers[ble_cls_last];
 
 	void ble_default(const void*);
+
 #ifdef __cplusplus
 }
 #endif

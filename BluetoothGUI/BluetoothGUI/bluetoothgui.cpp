@@ -170,10 +170,10 @@ void BluetoothGUI::setupConnections()
 {
 	ui.LOG->append("Inside setupConnections");
 	// setup the signals to listen for from BLE112 object
-	connect(bled112, SIGNAL(connectBLED(bool)),  this,    SLOT(onConnect(bool)));								// signal emitted when opening serial port, response handled by BluetoothGUI in onConnect
-	connect(this,    SIGNAL(disconnect()),       bled112, SLOT(onDisconnect()),       DirectConnection);					// signnal emitted when usere presses disonnect, response handled by BLED112 in onDisconcet
-	connect(bled112, SIGNAL(updateLOG(QString)), this,    SLOT(onUpdateLOG(QString)), DirectConnection);
-	connect(this,	 SIGNAL(scanBLE()),          bled112, SLOT(onScan()),             DirectConnection);
+	connect(bled112, SIGNAL(connectBLED(bool)), this, SLOT(onConnect(bool)));								// signal emitted when opening serial port, response handled by BluetoothGUI in onConnect
+	connect(this, SIGNAL(disconnect()), bled112, SLOT(onDisconnect()));					// signnal emitted when usere presses disonnect, response handled by BLED112 in onDisconcet
+	connect(bled112, SIGNAL(updateLOG(QString)), this, SLOT(onUpdateLOG(QString)));
+	connect(this, SIGNAL(scanBLE()), bled112, SLOT(onScan()));
 }
 
 

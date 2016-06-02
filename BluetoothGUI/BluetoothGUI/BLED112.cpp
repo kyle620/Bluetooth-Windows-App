@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "BLED112.h"
+#include <QApplication>
 
 volatile HANDLE bled112;
 
@@ -43,7 +44,6 @@ void BLED112::doSetup(QThread* cThread, const QSerialPortInfo& serial_port)
 	bled_port = serial_port;
 	// once the Thread is started it will call backgroundTask()
 	connect(cThread, SIGNAL(started()), this, SLOT(backgroundTask()));
-	
 }
 
 void BLED112::backgroundTask()
@@ -107,10 +107,14 @@ void BLED112::onDisconnect()
 	bled112_connected = false;
 	stopThread();
 }
-	/* SLOT that recieves scanBLE sigmal */
+	/* SLOT that recieves scanBLE signal */
 void BLED112::onScan() {
 	ble_cmd_gap_discover(gap_discover_observation);	emit updateLOG("Listening for messages");
-	readMessage();
+	while (bled112_connected) {
+		qApp->processEvents();
+		readMessage();
+	}
+		
 
 }
 
@@ -120,7 +124,7 @@ int BLED112::readMessage() {
 	const struct ble_msg *apimsg;
 	struct ble_header apihdr;
 	unsigned char data[256];//enough for BLE
-							//read header
+	uint8 myData[256];						//read header
 
 	if (!ReadFile(bled112,
 		(unsigned char*)&apihdr,
@@ -146,11 +150,11 @@ int BLED112::readMessage() {
 	apimsg = ble_get_msg_hdr(apihdr);
 	if (!apimsg)
 	{
-		printf("ERROR: Message not found:%d:%d\n", (int)apihdr.cls, (int)apihdr.command);
+		qDebug() << "ERROR: Message not found:%d:%d\n", (int)apihdr.cls, (int)apihdr.command;
 		return -1;
 	}
 	apimsg->handler(data);
-
+	
 	return 0;
 }
 
@@ -168,6 +172,7 @@ void BLED112::stopThread() {
 	this->thread()->quit();
 }
 
+
 /* These functions are used for bluetooth communication */
 void ble_default(const void*v)
 {
@@ -176,6 +181,15 @@ void ble_default(const void*v)
 void ble_rsp_hardware_set_rxgain(const void*nul)
 {
 
+}
+
+void ble_rsp_attclient_read_long(const struct ble_msg_attclient_read_long_rsp_t *msg)
+{
+
+}
+
+void ble_rsp_hardware_set_soft_timer(const struct ble_msg_hardware_set_soft_timer_rsp_t *msg)
+{
 }
 
 void ble_rsp_system_aes_setkey(const void*nul)
@@ -278,16 +292,6 @@ void ble_rsp_attclient_write_command(const struct ble_msg_attclient_write_comman
 
 }
 
-void ble_rsp_attclient_reserved(const void *nul)
-{
-
-}
-
-void ble_rsp_attclient_read_long(const struct ble_msg_attclient_read_long_rsp_t *msg)
-{
-
-}
-
 void ble_rsp_system_whitelist_append(const struct ble_msg_system_whitelist_append_rsp_t *msg)
 {
 
@@ -318,22 +322,12 @@ void ble_rsp_sm_whitelist_bonds(const struct ble_msg_sm_whitelist_bonds_rsp_t *m
 
 }
 
-void ble_rsp_sm_set_security_mode(const void *nul)
-{
-
-}
-
 void ble_rsp_gap_set_filtering(const struct ble_msg_gap_set_filtering_rsp_t *msg)
 {
 
 }
 
 void ble_rsp_gap_set_adv_parameters(const struct ble_msg_gap_set_adv_parameters_rsp_t *msg)
-{
-
-}
-
-void ble_rsp_hardware_io_port_write(const struct ble_msg_hardware_io_port_write_rsp_t *msg)
 {
 
 }
@@ -628,10 +622,6 @@ void ble_rsp_sm_delete_bonding(const struct ble_msg_sm_delete_bonding_rsp_t *msg
 {
 }
 
-void ble_rsp_gap_set_address_mode(const void* nul)
-{
-}
-
 void ble_rsp_gap_set_mode(const struct ble_msg_gap_set_mode_rsp_t *msg)
 {
 }
@@ -649,10 +639,6 @@ void ble_rsp_gap_end_procedure(const struct ble_msg_gap_end_procedure_rsp_t *msg
 }
 
 void ble_rsp_hardware_io_port_config_irq(const struct ble_msg_hardware_io_port_config_irq_rsp_t *msg)
-{
-}
-
-void ble_rsp_hardware_set_soft_timer(const struct ble_msg_hardware_set_soft_timer_rsp_t *msg)
 {
 }
 
@@ -718,12 +704,12 @@ void ble_evt_connection_status(const struct ble_msg_connection_status_evt_t *msg
 {
 	if (msg->flags&connection_connected)
 	{
-		printf("#connected -> disconnect\n");
+		qDebug() << "#connected -> disconnect";
 		ble_cmd_connection_disconnect(msg->connection);
 	}
 	else
 	{
-		printf("#Not connected -> Scan\n");
+		qDebug() << "#Not connected -> Scan";
 		ble_cmd_gap_discover(1);
 	}
 }
@@ -776,15 +762,16 @@ void ble_evt_sm_smp_data(const struct ble_msg_sm_smp_data_evt_t *msg)
 
 void ble_evt_gap_scan_response(const struct ble_msg_gap_scan_response_evt_t *msg)
 {
+	
+	QString length = QString::number(msg->data.len);
 	int i;
-	printf("Size of data is: %d\n", msg->data.len);
-	for (i = 0; i<6; i++)
-		printf("%02x%s", msg->sender.addr[5 - i], i<5 ? ":" : "");
-	printf("\t%d\n", msg->rssi);
+	qDebug() << "Size of data is: " << length;
+	for (i = 0; i < 6; i++)
+		qDebug() << QString::number(msg->sender.addr[5 - i]), i<5 ? ":" : "";
+	qDebug() << "RSSI: " << QString::number(msg->rssi);
 	for (i = 0; i < msg->data.len; i++)
-		printf("%d ,", msg->data.data[i]);
-	printf("\n");
-}
+		qDebug() << "Data: " << QString::number(msg->data.data[i]);
+} 
 
 void ble_evt_gap_mode_changed(const struct ble_msg_gap_mode_changed_evt_t *msg)
 {
@@ -825,3 +812,12 @@ void ble_rsp_dfu_flash_upload_finish(const struct ble_msg_dfu_flash_upload_finis
 /**Device booted up in dfu, and is ready to receive commands**/
 void ble_evt_dfu_boot(const struct ble_msg_dfu_boot_evt_t *msg)
 {}
+
+void ble_rsp_hardware_io_port_write(const struct ble_msg_hardware_io_port_write_rsp_t *msg)
+{
+
+}
+
+void BLED112::my_ble_evt_gap_scan_response(const struct ble_msg_gap_scan_response_evt_t *msg) {
+
+}

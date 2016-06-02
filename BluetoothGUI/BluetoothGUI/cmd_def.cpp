@@ -12,7 +12,7 @@
 
 #include "cmd_def.h"
 
-
+//0,1,
 void(*bglib_output)(uint8 len1, uint8* data1, uint16 len2, uint8* data2) = 0;
 static const struct ble_msg  apis[] = {
 	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_system,ble_cmd_system_reset_id }, 0x2,(ble_cmd_handler)ble_default },
@@ -277,7 +277,7 @@ const struct ble_msg * ble_find_msg_hdr(struct ble_header hdr)
 		msg++;
 	}
 	return 0;
-}
+} 
 
 const struct ble_msg * ble_get_msg_hdr(struct ble_header hdr)
 {
