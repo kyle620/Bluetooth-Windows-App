@@ -698,9 +698,6 @@ private:
 	int readMessage();							// Reads data from BLED112, returns 0 for success
 
 	/* For BGLIB use */
-	const struct ble_msg * packetMessage;
-	struct ble_header packetHeader;
-	unsigned char * packetData;
 	unsigned char lastCommand[2];
 	unsigned char lastResponse[2];
 	unsigned char lastEvent[2];
