@@ -54,6 +54,42 @@ extern "C" {
 #endif
 #endif
 #endif
+#define DEFAULT 0
+#define evt_system_boot 210
+#define evt_system_debug 211
+#define evt_system_endpoint_watermark_rx_id 212
+#define evt_system_endpoint_watermark_tx_id 213
+#define evt_system_script_failure 214
+#define evt_system_no_license_key 215
+#define evt_system_protocol_error 216
+#define evt_flash_ps_key 217
+#define evt_attributes_value_id 218
+#define evt_attributes_user_read_request_id 219
+#define evt_attributes_status_id 220
+#define evt_connection_status_id 221
+#define evt_connection_version_ind_id 222
+#define evt_connection_feature_ind_id 223
+#define evt_connection_raw_rx_id 224
+#define evt_connection_disconnected_id 225
+#define evt_attclient_indicated 226
+#define evt_attclient_procedure_completed_id 227
+#define evt_attclient_group_found_id 228
+#define evt_attclient_attribute_found_id 229
+#define evt_attclient_find_information_found_id 230
+#define evt_attclient_attribute_value_id 231
+#define evt_attclient_read_multiple_response_id 232
+#define evt_sm_smp_data_id 233
+#define evt_sm_bonding_fail_id 234
+#define evt_sm_passkey_display_id 235
+#define evt_sm_passkey_request_id 236
+#define evt_sm_bond_status_id 237
+#define evt_gap_response 238
+#define evt_gap_mode_changed_id 239
+#define evt_hardware_io_port_status_id 240
+#define evt_hardware_soft_timer_id 241
+#define evt_hardware_adc_result_id 242 
+#define evt_hardware_analog_comparator_status_id 243
+#define evt_dfu_boot_id 244
 	struct ble_cmd_packet;
 	typedef void(*ble_cmd_handler)(const void*);		// can add additional parameters for handle(arg,...,...)
 	struct ble_header
@@ -69,7 +105,8 @@ extern "C" {
 	{
 		struct ble_header    hdr;
 		uint32               params;
-		ble_cmd_handler       handler;
+		ble_cmd_handler      handler;
+		int					msgType;	// lets us know which  message we have
 	};
 
 	const struct ble_msg * ble_find_msg_hdr(struct ble_header hdr);
@@ -2525,10 +2562,16 @@ extern "C" {
 	 /**Uploading is finished.**/
 #define ble_cmd_dfu_flash_upload_finish() ble_send_message (ble_cmd_dfu_flash_upload_finish_idx)
 
+
+	struct ble_class_handler_t
+	{
+		const struct ble_msg * const *msgs;
+		uint8 maxhandlers;
+	};
+
 	extern const struct ble_class_handler_t ble_class_rsp_handlers[ble_cls_last];
 	extern const struct ble_class_handler_t ble_class_evt_handlers[ble_cls_last];
-
-
+	void ble_default(const void*);
 #ifdef __cplusplus
 }
 #endif

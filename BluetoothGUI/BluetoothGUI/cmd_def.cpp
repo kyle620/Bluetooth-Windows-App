@@ -122,251 +122,251 @@ static const struct ble_msg  apis[] = {
 	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_dfu,ble_cmd_dfu_flash_upload_finish_id }, 0x0 },
 	{ { 0,0,0,0 }, 0, 0 } }; */
 static const struct ble_msg  apis[] = {
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_system,ble_cmd_system_reset_id }, 0x2, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_system,ble_cmd_system_hello_id }, 0x0, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_system,ble_cmd_system_address_get_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_system,ble_cmd_system_reg_write_id }, 0x24,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_system,ble_cmd_system_reg_read_id }, 0x4,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_system,ble_cmd_system_get_counters_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_system,ble_cmd_system_get_connections_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_system,ble_cmd_system_read_memory_id }, 0x26,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_system,ble_cmd_system_get_info_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_system,ble_cmd_system_endpoint_tx_id }, 0x82,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x7,ble_cls_system,ble_cmd_system_whitelist_append_id }, 0x2a,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x7,ble_cls_system,ble_cmd_system_whitelist_remove_id }, 0x2a,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_system,ble_cmd_system_whitelist_clear_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_system,ble_cmd_system_endpoint_rx_id }, 0x22,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_system,ble_cmd_system_endpoint_set_watermarks_id }, 0x222,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_system,ble_cmd_system_aes_setkey_id }, 0x8,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_system,ble_cmd_system_aes_encrypt_id }, 0x8,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_system,ble_cmd_system_aes_decrypt_id }, 0x8,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_flash,ble_cmd_flash_ps_defrag_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_flash,ble_cmd_flash_ps_dump_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_flash,ble_cmd_flash_ps_erase_all_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_flash,ble_cmd_flash_ps_save_id }, 0x84,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_flash,ble_cmd_flash_ps_load_id }, 0x4,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_flash,ble_cmd_flash_ps_erase_id }, 0x4,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_flash,ble_cmd_flash_erase_page_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_flash,ble_cmd_flash_write_data_id }, 0x86,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_flash,ble_cmd_flash_read_data_id }, 0x26,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x4,ble_cls_attributes,ble_cmd_attributes_write_id }, 0x824,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x4,ble_cls_attributes,ble_cmd_attributes_read_id }, 0x44,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_attributes,ble_cmd_attributes_read_type_id }, 0x4,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_attributes,ble_cmd_attributes_user_read_response_id }, 0x822,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_attributes,ble_cmd_attributes_user_write_response_id }, 0x22,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x4,ble_cls_attributes,ble_cmd_attributes_send_id }, 0x842,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_connection,ble_cmd_connection_disconnect_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_connection,ble_cmd_connection_get_rssi_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x9,ble_cls_connection,ble_cmd_connection_update_id }, 0x44442,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_connection,ble_cmd_connection_version_update_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_connection,ble_cmd_connection_channel_map_get_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_connection,ble_cmd_connection_channel_map_set_id }, 0x82,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_connection,ble_cmd_connection_features_get_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_connection,ble_cmd_connection_get_status_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_connection,ble_cmd_connection_raw_tx_id }, 0x82,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x8,ble_cls_attclient,ble_cmd_attclient_find_by_type_value_id }, 0x84442,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x6,ble_cls_attclient,ble_cmd_attclient_read_by_group_type_id }, 0x8442,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x6,ble_cls_attclient,ble_cmd_attclient_read_by_type_id }, 0x8442,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_attclient,ble_cmd_attclient_find_information_id }, 0x442,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_read_by_handle_id }, 0x42,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x4,ble_cls_attclient,ble_cmd_attclient_attribute_write_id }, 0x842,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x4,ble_cls_attclient,ble_cmd_attclient_write_command_id }, 0x842,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_attclient,ble_cmd_attclient_indicate_confirm_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_read_long_id }, 0x42,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x6,ble_cls_attclient,ble_cmd_attclient_prepare_write_id }, 0x8442,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_attclient,ble_cmd_attclient_execute_write_id }, 0x22,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_attclient,ble_cmd_attclient_read_multiple_id }, 0x82,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_sm,ble_cmd_sm_encrypt_start_id }, 0x22,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_sm,ble_cmd_sm_set_bondable_mode_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_sm,ble_cmd_sm_delete_bonding_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_sm,ble_cmd_sm_set_parameters_id }, 0x222,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_sm,ble_cmd_sm_passkey_entry_id }, 0x62,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_sm,ble_cmd_sm_get_bonds_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_sm,ble_cmd_sm_set_oob_data_id }, 0x8,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_sm,ble_cmd_sm_whitelist_bonds_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_privacy_flags_id }, 0x22,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_mode_id }, 0x22,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_gap,ble_cmd_gap_discover_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0xf,ble_cls_gap,ble_cmd_gap_connect_direct_id }, 0x44442a,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_gap,ble_cmd_gap_end_procedure_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x8,ble_cls_gap,ble_cmd_gap_connect_selective_id }, 0x4444,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_gap,ble_cmd_gap_set_filtering_id }, 0x222,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_gap,ble_cmd_gap_set_scan_parameters_id }, 0x244,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_gap,ble_cmd_gap_set_adv_parameters_id }, 0x244,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_adv_data_id }, 0x82,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x7,ble_cls_gap,ble_cmd_gap_set_directed_connectable_mode_id }, 0x2a,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_io_port_config_irq_id }, 0x222,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x6,ble_cls_hardware,ble_cmd_hardware_set_soft_timer_id }, 0x226,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_adc_read_id }, 0x222,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_config_direction_id }, 0x22,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_config_function_id }, 0x22,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_io_port_config_pull_id }, 0x222,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_io_port_write_id }, 0x222,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_read_id }, 0x22,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x6,ble_cls_hardware,ble_cmd_hardware_spi_config_id }, 0x222222,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_spi_transfer_id }, 0x82,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_i2c_read_id }, 0x222,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_i2c_write_id }, 0x822,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_hardware,ble_cmd_hardware_set_txpower_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_hardware,ble_cmd_hardware_timer_comparator_id }, 0x4222,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_irq_enable_id }, 0x22,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_irq_direction_id }, 0x22,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_hardware,ble_cmd_hardware_analog_comparator_enable_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_hardware,ble_cmd_hardware_analog_comparator_read_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_hardware,ble_cmd_hardware_analog_comparator_config_irq_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_hardware,ble_cmd_hardware_set_rxgain_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_hardware,ble_cmd_hardware_usb_enable_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_test,ble_cmd_test_phy_tx_id }, 0x222,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_test,ble_cmd_test_phy_rx_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_test,ble_cmd_test_phy_end_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_test,ble_cmd_test_phy_reset_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_test,ble_cmd_test_get_channel_map_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_test,ble_cmd_test_debug_id }, 0x8,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_test,ble_cmd_test_channel_mode_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_dfu,ble_cmd_dfu_reset_id }, 0x2,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x4,ble_cls_dfu,ble_cmd_dfu_flash_set_address_id }, 0x6,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_dfu,ble_cmd_dfu_flash_upload_id }, 0x8,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_dfu,ble_cmd_dfu_flash_upload_finish_id }, 0x0,(ble_cmd_handler)ble_default },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_system,ble_cmd_system_reset_id }, 0x0,	(ble_cmd_handler)ble_rsp_system_reset },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_system,ble_cmd_system_hello_id }, 0x0,	(ble_cmd_handler)ble_rsp_system_hello },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x6,ble_cls_system,ble_cmd_system_address_get_id }, 0xa,	(ble_cmd_handler)ble_rsp_system_address_get },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_system,ble_cmd_system_reg_write_id }, 0x4,	(ble_cmd_handler)ble_rsp_system_reg_write },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_system,ble_cmd_system_reg_read_id }, 0x24,	(ble_cmd_handler)ble_rsp_system_reg_read },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x5,ble_cls_system,ble_cmd_system_get_counters_id }, 0x22222,	(ble_cmd_handler)ble_rsp_system_get_counters },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_system,ble_cmd_system_get_connections_id }, 0x2,	(ble_cmd_handler)ble_rsp_system_get_connections },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x5,ble_cls_system,ble_cmd_system_read_memory_id }, 0x86, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0xc,ble_cls_system,ble_cmd_system_get_info_id }, 0x2244444, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_system,ble_cmd_system_endpoint_tx_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_system,ble_cmd_system_whitelist_append_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_system,ble_cmd_system_whitelist_remove_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_system,ble_cmd_system_whitelist_clear_id }, 0x0, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_system,ble_cmd_system_endpoint_rx_id }, 0x84, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_system,ble_cmd_system_endpoint_set_watermarks_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_system,ble_cmd_system_aes_setkey_id }, 0x0,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_system,ble_cmd_system_aes_encrypt_id }, 0x8, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_system,ble_cmd_system_aes_decrypt_id }, 0x8, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_flash,ble_cmd_flash_ps_defrag_id }, 0x0, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_flash,ble_cmd_flash_ps_dump_id }, 0x0, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_flash,ble_cmd_flash_ps_erase_all_id }, 0x0, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_flash,ble_cmd_flash_ps_save_id }, 0x4,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_flash,ble_cmd_flash_ps_load_id }, 0x84,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_flash,ble_cmd_flash_ps_erase_id }, 0x0, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_flash,ble_cmd_flash_erase_page_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_flash,ble_cmd_flash_write_data_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_flash,ble_cmd_flash_read_data_id }, 0x8, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_attributes,ble_cmd_attributes_write_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x7,ble_cls_attributes,ble_cmd_attributes_read_id }, 0x8444,},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x5,ble_cls_attributes,ble_cmd_attributes_read_type_id }, 0x844, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_attributes,ble_cmd_attributes_user_read_response_id }, 0x0,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_attributes,ble_cmd_attributes_user_write_response_id }, 0x0, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_attributes,ble_cmd_attributes_send_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_connection,ble_cmd_connection_disconnect_id }, 0x42, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_connection,ble_cmd_connection_get_rssi_id }, 0x32, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_connection,ble_cmd_connection_update_id }, 0x42, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_connection,ble_cmd_connection_version_update_id }, 0x42, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_connection,ble_cmd_connection_channel_map_get_id }, 0x82, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_connection,ble_cmd_connection_channel_map_set_id }, 0x42, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_connection,ble_cmd_connection_features_get_id }, 0x42, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_connection,ble_cmd_connection_get_status_id }, 0x2, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_connection,ble_cmd_connection_raw_tx_id }, 0x2,},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_find_by_type_value_id }, 0x42, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_read_by_group_type_id }, 0x42, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_read_by_type_id }, 0x42,},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_find_information_id }, 0x42,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_read_by_handle_id }, 0x42,},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_attribute_write_id }, 0x42,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_write_command_id }, 0x42, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_attclient,ble_cmd_attclient_indicate_confirm_id }, 0x4,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_read_long_id }, 0x42, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_prepare_write_id }, 0x42, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_execute_write_id }, 0x42, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_read_multiple_id }, 0x42, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_sm,ble_cmd_sm_encrypt_start_id }, 0x42, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_sm,ble_cmd_sm_set_bondable_mode_id }, 0x0,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_sm,ble_cmd_sm_delete_bonding_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_sm,ble_cmd_sm_set_parameters_id }, 0x0,},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_sm,ble_cmd_sm_passkey_entry_id }, 0x4,},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_sm,ble_cmd_sm_get_bonds_id }, 0x2, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_sm,ble_cmd_sm_set_oob_data_id }, 0x0, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_sm,ble_cmd_sm_whitelist_bonds_id }, 0x24, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_gap,ble_cmd_gap_set_privacy_flags_id }, 0x0, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_mode_id }, 0x4,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_discover_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_gap,ble_cmd_gap_connect_direct_id }, 0x24, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_end_procedure_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_gap,ble_cmd_gap_connect_selective_id }, 0x24, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_filtering_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_scan_parameters_id }, 0x4,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_adv_parameters_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_adv_data_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_directed_connectable_mode_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_config_irq_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_set_soft_timer_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_adc_read_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_config_direction_id }, 0x4,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_config_function_id }, 0x4,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_config_pull_id }, 0x4,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_write_id }, 0x4,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x4,ble_cls_hardware,ble_cmd_hardware_io_port_read_id }, 0x224,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_spi_config_id }, 0x4,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x4,ble_cls_hardware,ble_cmd_hardware_spi_transfer_id }, 0x824,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_i2c_read_id }, 0x84,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_hardware,ble_cmd_hardware_i2c_write_id }, 0x2,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_hardware,ble_cmd_hardware_set_txpower_id }, 0x0,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_timer_comparator_id }, 0x4,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_irq_enable_id }, 0x4,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_irq_direction_id }, 0x4,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_hardware,ble_cmd_hardware_analog_comparator_enable_id }, 0x0,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_analog_comparator_read_id }, 0x24,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_analog_comparator_config_irq_id }, 0x4,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_hardware,ble_cmd_hardware_set_rxgain_id }, 0x0,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_usb_enable_id }, 0x4,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_test,ble_cmd_test_phy_tx_id }, 0x0,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_test,ble_cmd_test_phy_rx_id }, 0x0, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_test,ble_cmd_test_phy_end_id }, 0x4,},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_test,ble_cmd_test_phy_reset_id }, 0x0,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_test,ble_cmd_test_get_channel_map_id }, 0x8, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_test,ble_cmd_test_debug_id }, 0x8,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_test,ble_cmd_test_channel_mode_id }, 0x0,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_dfu,ble_cmd_dfu_reset_id }, 0x0,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_dfu,ble_cmd_dfu_flash_set_address_id }, 0x4,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_dfu,ble_cmd_dfu_flash_upload_id }, 0x4,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_dfu,ble_cmd_dfu_flash_upload_finish_id }, 0x4, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0xc,ble_cls_system,ble_evt_system_boot_id }, 0x2244444,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x1,ble_cls_system,ble_evt_system_debug_id }, 0x8,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x2,ble_cls_system,ble_evt_system_endpoint_watermark_rx_id }, 0x22,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x2,ble_cls_system,ble_evt_system_endpoint_watermark_tx_id }, 0x22,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x4,ble_cls_system,ble_evt_system_script_failure_id }, 0x44,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x0,ble_cls_system,ble_evt_system_no_license_key_id }, 0x0,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x2,ble_cls_system,ble_evt_system_protocol_error_id }, 0x4,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x3,ble_cls_flash,ble_evt_flash_ps_key_id }, 0x84,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x7,ble_cls_attributes,ble_evt_attributes_value_id }, 0x84422,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x6,ble_cls_attributes,ble_evt_attributes_user_read_request_id }, 0x2442, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x3,ble_cls_attributes,ble_evt_attributes_status_id }, 0x24,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x10,ble_cls_connection,ble_evt_connection_status_id }, 0x24442a22,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x6,ble_cls_connection,ble_evt_connection_version_ind_id }, 0x4422,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x2,ble_cls_connection,ble_evt_connection_feature_ind_id }, 0x82,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x2,ble_cls_connection,ble_evt_connection_raw_rx_id }, 0x82,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x3,ble_cls_connection,ble_evt_connection_disconnected_id }, 0x42, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x3,ble_cls_attclient,ble_evt_attclient_indicated_id }, 0x42,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x5,ble_cls_attclient,ble_evt_attclient_procedure_completed_id }, 0x442, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x6,ble_cls_attclient,ble_evt_attclient_group_found_id }, 0x8442,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x7,ble_cls_attclient,ble_evt_attclient_attribute_found_id }, 0x82442, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x4,ble_cls_attclient,ble_evt_attclient_find_information_found_id }, 0x842, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x5,ble_cls_attclient,ble_evt_attclient_attribute_value_id }, 0x8242,	},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x2,ble_cls_attclient,ble_evt_attclient_read_multiple_response_id }, 0x82,},
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x3,ble_cls_sm,ble_evt_sm_smp_data_id }, 0x822,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x3,ble_cls_sm,ble_evt_sm_bonding_fail_id }, 0x42, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x5,ble_cls_sm,ble_evt_sm_passkey_display_id }, 0x62, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x1,ble_cls_sm,ble_evt_sm_passkey_request_id }, 0x2, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x4,ble_cls_sm,ble_evt_sm_bond_status_id }, 0x2222, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0xb,ble_cls_gap,ble_evt_gap_scan_response_id }, 0x822a23, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x2,ble_cls_gap,ble_evt_gap_mode_changed_id }, 0x22, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x7,ble_cls_hardware,ble_evt_hardware_io_port_status_id }, 0x2226, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x1,ble_cls_hardware,ble_evt_hardware_soft_timer_id }, 0x2,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x3,ble_cls_hardware,ble_evt_hardware_adc_result_id }, 0x52, },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x5,ble_cls_hardware,ble_evt_hardware_analog_comparator_status_id }, 0x26,	 },
-	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x4,ble_cls_dfu,ble_evt_dfu_boot_id }, 0x6,	 },
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_system,ble_cmd_system_reset_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_system,ble_cmd_system_hello_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_system,ble_cmd_system_address_get_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_system,ble_cmd_system_reg_write_id }, 0x24, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_system,ble_cmd_system_reg_read_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_system,ble_cmd_system_get_counters_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_system,ble_cmd_system_get_connections_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_system,ble_cmd_system_read_memory_id }, 0x26, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_system,ble_cmd_system_get_info_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_system,ble_cmd_system_endpoint_tx_id }, 0x82, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x7,ble_cls_system,ble_cmd_system_whitelist_append_id }, 0x2a, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x7,ble_cls_system,ble_cmd_system_whitelist_remove_id }, 0x2a, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_system,ble_cmd_system_whitelist_clear_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_system,ble_cmd_system_endpoint_rx_id }, 0x22, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_system,ble_cmd_system_endpoint_set_watermarks_id }, 0x222, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_system,ble_cmd_system_aes_setkey_id }, 0x8, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_system,ble_cmd_system_aes_encrypt_id }, 0x8, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_system,ble_cmd_system_aes_decrypt_id }, 0x8, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_flash,ble_cmd_flash_ps_defrag_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_flash,ble_cmd_flash_ps_dump_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_flash,ble_cmd_flash_ps_erase_all_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_flash,ble_cmd_flash_ps_save_id }, 0x84, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_flash,ble_cmd_flash_ps_load_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_flash,ble_cmd_flash_ps_erase_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_flash,ble_cmd_flash_erase_page_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_flash,ble_cmd_flash_write_data_id }, 0x86, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_flash,ble_cmd_flash_read_data_id }, 0x26, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x4,ble_cls_attributes,ble_cmd_attributes_write_id }, 0x824, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x4,ble_cls_attributes,ble_cmd_attributes_read_id }, 0x44, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_attributes,ble_cmd_attributes_read_type_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_attributes,ble_cmd_attributes_user_read_response_id }, 0x822, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_attributes,ble_cmd_attributes_user_write_response_id }, 0x22, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x4,ble_cls_attributes,ble_cmd_attributes_send_id }, 0x842, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_connection,ble_cmd_connection_disconnect_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_connection,ble_cmd_connection_get_rssi_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x9,ble_cls_connection,ble_cmd_connection_update_id }, 0x44442, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_connection,ble_cmd_connection_version_update_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_connection,ble_cmd_connection_channel_map_get_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_connection,ble_cmd_connection_channel_map_set_id }, 0x82, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_connection,ble_cmd_connection_features_get_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_connection,ble_cmd_connection_get_status_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_connection,ble_cmd_connection_raw_tx_id }, 0x82, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x8,ble_cls_attclient,ble_cmd_attclient_find_by_type_value_id }, 0x84442, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x6,ble_cls_attclient,ble_cmd_attclient_read_by_group_type_id }, 0x8442, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x6,ble_cls_attclient,ble_cmd_attclient_read_by_type_id }, 0x8442, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_attclient,ble_cmd_attclient_find_information_id }, 0x442, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_read_by_handle_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x4,ble_cls_attclient,ble_cmd_attclient_attribute_write_id }, 0x842, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x4,ble_cls_attclient,ble_cmd_attclient_write_command_id }, 0x842, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_attclient,ble_cmd_attclient_indicate_confirm_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_read_long_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x6,ble_cls_attclient,ble_cmd_attclient_prepare_write_id }, 0x8442, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_attclient,ble_cmd_attclient_execute_write_id }, 0x22, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_attclient,ble_cmd_attclient_read_multiple_id }, 0x82, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_sm,ble_cmd_sm_encrypt_start_id }, 0x22, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_sm,ble_cmd_sm_set_bondable_mode_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_sm,ble_cmd_sm_delete_bonding_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_sm,ble_cmd_sm_set_parameters_id }, 0x222, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_sm,ble_cmd_sm_passkey_entry_id }, 0x62, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_sm,ble_cmd_sm_get_bonds_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_sm,ble_cmd_sm_set_oob_data_id }, 0x8, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_sm,ble_cmd_sm_whitelist_bonds_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_privacy_flags_id }, 0x22, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_mode_id }, 0x22, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_gap,ble_cmd_gap_discover_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0xf,ble_cls_gap,ble_cmd_gap_connect_direct_id }, 0x44442a, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_gap,ble_cmd_gap_end_procedure_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x8,ble_cls_gap,ble_cmd_gap_connect_selective_id }, 0x4444, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_gap,ble_cmd_gap_set_filtering_id }, 0x222, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_gap,ble_cmd_gap_set_scan_parameters_id }, 0x244, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_gap,ble_cmd_gap_set_adv_parameters_id }, 0x244, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_adv_data_id }, 0x82, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x7,ble_cls_gap,ble_cmd_gap_set_directed_connectable_mode_id }, 0x2a, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_io_port_config_irq_id }, 0x222, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x6,ble_cls_hardware,ble_cmd_hardware_set_soft_timer_id }, 0x226, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_adc_read_id }, 0x222, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_config_direction_id }, 0x22, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_config_function_id }, 0x22, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_io_port_config_pull_id }, 0x222, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_io_port_write_id }, 0x222, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_read_id }, 0x22, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x6,ble_cls_hardware,ble_cmd_hardware_spi_config_id }, 0x222222, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_spi_transfer_id }, 0x82, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_i2c_read_id }, 0x222, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_i2c_write_id }, 0x822, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_hardware,ble_cmd_hardware_set_txpower_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x5,ble_cls_hardware,ble_cmd_hardware_timer_comparator_id }, 0x4222, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_irq_enable_id }, 0x22, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_irq_direction_id }, 0x22, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_hardware,ble_cmd_hardware_analog_comparator_enable_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_hardware,ble_cmd_hardware_analog_comparator_read_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_hardware,ble_cmd_hardware_analog_comparator_config_irq_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_hardware,ble_cmd_hardware_set_rxgain_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_hardware,ble_cmd_hardware_usb_enable_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x3,ble_cls_test,ble_cmd_test_phy_tx_id }, 0x222, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_test,ble_cmd_test_phy_rx_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_test,ble_cmd_test_phy_end_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_test,ble_cmd_test_phy_reset_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_test,ble_cmd_test_get_channel_map_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_test,ble_cmd_test_debug_id }, 0x8, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_test,ble_cmd_test_channel_mode_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_dfu,ble_cmd_dfu_reset_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x4,ble_cls_dfu,ble_cmd_dfu_flash_set_address_id }, 0x6, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x1,ble_cls_dfu,ble_cmd_dfu_flash_upload_id }, 0x8, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_cmd | 0x0,0x0,ble_cls_dfu,ble_cmd_dfu_flash_upload_finish_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_system,ble_cmd_system_reset_id }, 0x0,	(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_system,ble_cmd_system_hello_id }, 0x0,(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x6,ble_cls_system,ble_cmd_system_address_get_id }, 0xa, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_system,ble_cmd_system_reg_write_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_system,ble_cmd_system_reg_read_id }, 0x24, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x5,ble_cls_system,ble_cmd_system_get_counters_id }, 0x22222, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_system,ble_cmd_system_get_connections_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x5,ble_cls_system,ble_cmd_system_read_memory_id }, 0x86, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0xc,ble_cls_system,ble_cmd_system_get_info_id }, 0x2244444, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_system,ble_cmd_system_endpoint_tx_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_system,ble_cmd_system_whitelist_append_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_system,ble_cmd_system_whitelist_remove_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_system,ble_cmd_system_whitelist_clear_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_system,ble_cmd_system_endpoint_rx_id }, 0x84, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_system,ble_cmd_system_endpoint_set_watermarks_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_system,ble_cmd_system_aes_setkey_id }, 0x0,	(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_system,ble_cmd_system_aes_encrypt_id }, 0x8, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_system,ble_cmd_system_aes_decrypt_id }, 0x8, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_flash,ble_cmd_flash_ps_defrag_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_flash,ble_cmd_flash_ps_dump_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_flash,ble_cmd_flash_ps_erase_all_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_flash,ble_cmd_flash_ps_save_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_flash,ble_cmd_flash_ps_load_id }, 0x84,	(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_flash,ble_cmd_flash_ps_erase_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_flash,ble_cmd_flash_erase_page_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_flash,ble_cmd_flash_write_data_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_flash,ble_cmd_flash_read_data_id }, 0x8, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_attributes,ble_cmd_attributes_write_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x7,ble_cls_attributes,ble_cmd_attributes_read_id }, 0x8444,(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x5,ble_cls_attributes,ble_cmd_attributes_read_type_id }, 0x844, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_attributes,ble_cmd_attributes_user_read_response_id }, 0x0,	(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_attributes,ble_cmd_attributes_user_write_response_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_attributes,ble_cmd_attributes_send_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_connection,ble_cmd_connection_disconnect_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_connection,ble_cmd_connection_get_rssi_id }, 0x32, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_connection,ble_cmd_connection_update_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_connection,ble_cmd_connection_version_update_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_connection,ble_cmd_connection_channel_map_get_id }, 0x82, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_connection,ble_cmd_connection_channel_map_set_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_connection,ble_cmd_connection_features_get_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_connection,ble_cmd_connection_get_status_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_connection,ble_cmd_connection_raw_tx_id }, 0x2,(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_find_by_type_value_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_read_by_group_type_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_read_by_type_id }, 0x42,(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_find_information_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_read_by_handle_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_attribute_write_id }, 0x42,	(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_write_command_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_attclient,ble_cmd_attclient_indicate_confirm_id }, 0x4,	(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_read_long_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_prepare_write_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_execute_write_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_attclient,ble_cmd_attclient_read_multiple_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_sm,ble_cmd_sm_encrypt_start_id }, 0x42, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_sm,ble_cmd_sm_set_bondable_mode_id }, 0x0,(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_sm,ble_cmd_sm_delete_bonding_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_sm,ble_cmd_sm_set_parameters_id }, 0x0,(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_sm,ble_cmd_sm_passkey_entry_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_sm,ble_cmd_sm_get_bonds_id }, 0x2, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_sm,ble_cmd_sm_set_oob_data_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_sm,ble_cmd_sm_whitelist_bonds_id }, 0x24, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_gap,ble_cmd_gap_set_privacy_flags_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_mode_id }, 0x4,(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_discover_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_gap,ble_cmd_gap_connect_direct_id }, 0x24, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_end_procedure_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_gap,ble_cmd_gap_connect_selective_id }, 0x24, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_filtering_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_scan_parameters_id }, 0x4,(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_adv_parameters_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_adv_data_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_gap,ble_cmd_gap_set_directed_connectable_mode_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_config_irq_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_set_soft_timer_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_adc_read_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_config_direction_id }, 0x4,(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_config_function_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_config_pull_id }, 0x4,(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_write_id }, 0x4,	(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x4,ble_cls_hardware,ble_cmd_hardware_io_port_read_id }, 0x224,	(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_spi_config_id }, 0x4,	(ble_cmd_handler)ble_default, DEFAULT},
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x4,ble_cls_hardware,ble_cmd_hardware_spi_transfer_id }, 0x824,	(ble_cmd_handler)ble_default, DEFAULT}, // 188
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_i2c_read_id }, 0x84,	 (ble_cmd_handler)ble_default, DEFAULT}, // 189
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_hardware,ble_cmd_hardware_i2c_write_id }, 0x2,(ble_cmd_handler)ble_default, DEFAULT}, // 190
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_hardware,ble_cmd_hardware_set_txpower_id }, 0x0,	(ble_cmd_handler)ble_default, DEFAULT}, // 191
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_timer_comparator_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT}, // 192
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_irq_enable_id }, 0x4,	(ble_cmd_handler)ble_default, DEFAULT},// 193
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_io_port_irq_direction_id }, 0x4,(ble_cmd_handler)ble_default, DEFAULT}, // 194 
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_hardware,ble_cmd_hardware_analog_comparator_enable_id }, 0x0,(ble_cmd_handler)ble_default, DEFAULT}, // 195
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x3,ble_cls_hardware,ble_cmd_hardware_analog_comparator_read_id }, 0x24,(ble_cmd_handler)ble_default, DEFAULT}, // 196
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_analog_comparator_config_irq_id }, 0x4,(ble_cmd_handler)ble_default, DEFAULT}, // 197
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_hardware,ble_cmd_hardware_set_rxgain_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT}, // 198
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_hardware,ble_cmd_hardware_usb_enable_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT}, // 199
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_test,ble_cmd_test_phy_tx_id }, 0x0,	(ble_cmd_handler)ble_default, DEFAULT}, // 200
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_test,ble_cmd_test_phy_rx_id }, 0x0, (ble_cmd_handler)ble_default, DEFAULT}, // 201
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_test,ble_cmd_test_phy_end_id }, 0x4,(ble_cmd_handler)ble_default, DEFAULT}, // 202
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_test,ble_cmd_test_phy_reset_id }, 0x0,	(ble_cmd_handler)ble_default, DEFAULT}, // 203
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_test,ble_cmd_test_get_channel_map_id }, 0x8, (ble_cmd_handler)ble_default, DEFAULT}, // 204
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x1,ble_cls_test,ble_cmd_test_debug_id }, 0x8,	(ble_cmd_handler)ble_default, DEFAULT}, // 205
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_test,ble_cmd_test_channel_mode_id }, 0x0,(ble_cmd_handler)ble_default, DEFAULT}, // 206
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x0,ble_cls_dfu,ble_cmd_dfu_reset_id }, 0x0,(ble_cmd_handler)ble_default, DEFAULT}, // 207
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_dfu,ble_cmd_dfu_flash_set_address_id }, 0x4,(ble_cmd_handler)ble_default, DEFAULT}, // 208
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_dfu,ble_cmd_dfu_flash_upload_id }, 0x4,	(ble_cmd_handler)ble_default, DEFAULT}, // 209
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_rsp | 0x0,0x2,ble_cls_dfu,ble_cmd_dfu_flash_upload_finish_id }, 0x4, (ble_cmd_handler)ble_default, DEFAULT}, //210
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0xc,ble_cls_system,ble_evt_system_boot_id }, 0x2244444,(ble_cmd_handler)ble_default, evt_system_boot}, // 210
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x1,ble_cls_system,ble_evt_system_debug_id }, 0x8,	(ble_cmd_handler)ble_default, evt_system_debug}, // 211
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x2,ble_cls_system,ble_evt_system_endpoint_watermark_rx_id }, 0x22,	(ble_cmd_handler)ble_default, evt_system_endpoint_watermark_rx_id }, // 212
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x2,ble_cls_system,ble_evt_system_endpoint_watermark_tx_id }, 0x22,	(ble_cmd_handler)ble_default, evt_system_endpoint_watermark_tx_id }, // 213
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x4,ble_cls_system,ble_evt_system_script_failure_id }, 0x44,(ble_cmd_handler)ble_default, evt_system_script_failure}, // 214
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x0,ble_cls_system,ble_evt_system_no_license_key_id }, 0x0,(ble_cmd_handler)ble_default, evt_system_no_license_key}, // 215
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x2,ble_cls_system,ble_evt_system_protocol_error_id }, 0x4,	(ble_cmd_handler)ble_default, evt_system_protocol_error}, //216
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x3,ble_cls_flash,ble_evt_flash_ps_key_id }, 0x84,(ble_cmd_handler)ble_default, evt_flash_ps_key }, //217
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x7,ble_cls_attributes,ble_evt_attributes_value_id }, 0x84422,(ble_cmd_handler)ble_default, evt_attributes_value_id }, // 218
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x6,ble_cls_attributes,ble_evt_attributes_user_read_request_id }, 0x2442, (ble_cmd_handler)ble_default, evt_attributes_user_read_request_id },	//219
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x3,ble_cls_attributes,ble_evt_attributes_status_id }, 0x24,(ble_cmd_handler)ble_default, evt_attributes_status_id }, // 220
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x10,ble_cls_connection,ble_evt_connection_status_id }, 0x24442a22,	(ble_cmd_handler)ble_default, evt_connection_status_id },	// 221
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x6,ble_cls_connection,ble_evt_connection_version_ind_id }, 0x4422,	(ble_cmd_handler)ble_default, evt_connection_version_ind_id },	//222
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x2,ble_cls_connection,ble_evt_connection_feature_ind_id }, 0x82,(ble_cmd_handler)ble_default, evt_connection_feature_ind_id },	//223
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x2,ble_cls_connection,ble_evt_connection_raw_rx_id }, 0x82,(ble_cmd_handler)ble_default, evt_connection_raw_rx_id },	// 224
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x3,ble_cls_connection,ble_evt_connection_disconnected_id }, 0x42, (ble_cmd_handler)ble_default, evt_connection_disconnected_id }, // 225
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x3,ble_cls_attclient,ble_evt_attclient_indicated_id }, 0x42,(ble_cmd_handler)ble_default, evt_attclient_indicated }, //226
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x5,ble_cls_attclient,ble_evt_attclient_procedure_completed_id }, 0x442, (ble_cmd_handler)ble_default, evt_attclient_procedure_completed_id }, // 227
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x6,ble_cls_attclient,ble_evt_attclient_group_found_id }, 0x8442,(ble_cmd_handler)ble_default, evt_attclient_group_found_id },	// 228
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x7,ble_cls_attclient,ble_evt_attclient_attribute_found_id }, 0x82442, (ble_cmd_handler)ble_default, evt_attclient_attribute_found_id },	// 229
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x4,ble_cls_attclient,ble_evt_attclient_find_information_found_id }, 0x842, (ble_cmd_handler)ble_default, evt_attclient_find_information_found_id }, // 230
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x5,ble_cls_attclient,ble_evt_attclient_attribute_value_id }, 0x8242,(ble_cmd_handler)ble_default, evt_attclient_attribute_value_id },	// 231
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x2,ble_cls_attclient,ble_evt_attclient_read_multiple_response_id }, 0x82,(ble_cmd_handler)ble_default, evt_attclient_read_multiple_response_id }, // 232
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x3,ble_cls_sm,ble_evt_sm_smp_data_id }, 0x822,	(ble_cmd_handler)ble_default, evt_sm_smp_data_id },		// 233
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x3,ble_cls_sm,ble_evt_sm_bonding_fail_id }, 0x42, (ble_cmd_handler)ble_default, evt_sm_bonding_fail_id },	// 234
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x5,ble_cls_sm,ble_evt_sm_passkey_display_id }, 0x62, (ble_cmd_handler)ble_default, evt_sm_passkey_display_id }, //235
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x1,ble_cls_sm,ble_evt_sm_passkey_request_id }, 0x2, (ble_cmd_handler)ble_default, evt_sm_passkey_request_id }, //236
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x4,ble_cls_sm,ble_evt_sm_bond_status_id }, 0x2222, (ble_cmd_handler)ble_default, evt_sm_bond_status_id }, //237
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0xb,ble_cls_gap,ble_evt_gap_scan_response_id }, 0x822a23, (ble_cmd_handler)ble_default, evt_gap_response }, //238
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x2,ble_cls_gap,ble_evt_gap_mode_changed_id }, 0x22, (ble_cmd_handler)ble_default, evt_gap_mode_changed_id },	// 239
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x7,ble_cls_hardware,ble_evt_hardware_io_port_status_id }, 0x2226, (ble_cmd_handler)ble_default,evt_hardware_io_port_status_id }, //240
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x1,ble_cls_hardware,ble_evt_hardware_soft_timer_id }, 0x2,	(ble_cmd_handler)ble_default, evt_hardware_soft_timer_id }, // 241
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x3,ble_cls_hardware,ble_evt_hardware_adc_result_id }, 0x52, (ble_cmd_handler)ble_default,evt_hardware_adc_result_id }, //242
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x5,ble_cls_hardware,ble_evt_hardware_analog_comparator_status_id }, 0x26,(ble_cmd_handler)ble_default, evt_hardware_analog_comparator_status_id}, //243
+	{ { (uint8)ble_dev_type_ble | (uint8)ble_msg_type_evt | 0x0,0x4,ble_cls_dfu,evt_dfu_boot_id }, 0x6, (ble_cmd_handler)ble_default, evt_dfu_boot_id }, //244
 	{ { 0,0,0,0 }, 0, 0 } };
 const struct ble_msg * ble_get_msg(uint8 idx)
 {
@@ -385,6 +385,28 @@ const struct ble_msg * ble_find_msg_hdr(struct ble_header hdr)
 	}
 	return 0;
 } 
+
+const struct ble_msg * ble_get_msg_hdr(struct ble_header hdr)
+{
+	if ((hdr.type_hilen & 0x80) == ble_msg_type_evt)
+	{
+		if (hdr.cls >= (sizeof(ble_class_evt_handlers) / sizeof(struct ble_class_handler_t)))
+			return NULL;
+		if (hdr.command >= ble_class_evt_handlers[hdr.cls].maxhandlers)
+			return NULL;
+		return ble_class_evt_handlers[hdr.cls].msgs[hdr.command];
+	}
+	else
+		if ((hdr.type_hilen & 0x80) == ble_msg_type_rsp)
+		{
+			if (hdr.cls >= (sizeof(ble_class_rsp_handlers) / sizeof(struct ble_class_handler_t)))
+				return NULL;
+			if (hdr.command >= ble_class_rsp_handlers[hdr.cls].maxhandlers)
+				return NULL;
+			return ble_class_rsp_handlers[hdr.cls].msgs[hdr.command];
+		}
+	return ble_find_msg_hdr(hdr);
+}
 
 void ble_send_message(uint8 msgid, ...)
 {
@@ -468,6 +490,10 @@ void ble_send_message(uint8 msgid, ...)
 	}
 	va_end(va);
 	if (bglib_output)bglib_output(sizeof(struct ble_header) + apis[msgid].hdr.lolen, (uint8*)&packet, data_len, (uint8*)data_ptr);
+}
+
+void ble_default(const void *)
+{
 }
 
 static const struct ble_msg* const ble_class_system_rsp_handlers[] =
@@ -668,4 +694,29 @@ static const struct ble_msg* const ble_class_dfu_evt_handlers[] =
 	&apis[ble_evt_dfu_boot_idx],
 };
 
-
+const struct ble_class_handler_t ble_class_rsp_handlers[ble_cls_last] =
+{
+	{ ble_class_system_rsp_handlers,18 },
+	{ ble_class_flash_rsp_handlers,9 },
+	{ ble_class_attributes_rsp_handlers,6 },
+	{ ble_class_connection_rsp_handlers,9 },
+	{ ble_class_attclient_rsp_handlers,12 },
+	{ ble_class_sm_rsp_handlers,8 },
+	{ ble_class_gap_rsp_handlers,11 },
+	{ ble_class_hardware_rsp_handlers,21 },
+	{ ble_class_test_rsp_handlers,7 },
+	{ ble_class_dfu_rsp_handlers,4 },
+};
+const struct ble_class_handler_t ble_class_evt_handlers[ble_cls_last] =
+{
+	{ ble_class_system_evt_handlers,7 },
+	{ ble_class_flash_evt_handlers,1 },
+	{ ble_class_attributes_evt_handlers,3 },
+	{ ble_class_connection_evt_handlers,5 },
+	{ ble_class_attclient_evt_handlers,7 },
+	{ ble_class_sm_evt_handlers,5 },
+	{ ble_class_gap_evt_handlers,2 },
+	{ ble_class_hardware_evt_handlers,4 },
+	{ NULL,0 },
+	{ ble_class_dfu_evt_handlers,1 },
+};

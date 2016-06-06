@@ -19,7 +19,10 @@ public:
 	bool openCOM();
 	void closeSerial();
 	void stopThread();
-	int parsePacket(unsigned char);															/* Parses the BLE packet */
+	int parsePacket(unsigned char);				
+	void handleResponse(const struct ble_msg* msg, unsigned char* data);
+
+	/* Parses the BLE packet */
 	void ble_rsp_system_reset(const void *nul);
 
 	//Hello - command for testing
@@ -431,7 +434,7 @@ public:
 	void ble_evt_sm_bond_status(const struct ble_msg_sm_bond_status_evt_t *msg);
 
 	//Scan Response
-	void ble_evt_gap_scan_response(const struct ble_msg_gap_scan_response_evt_t *msg);
+	void ble_evt_gap_scan_response(unsigned char* data);
 
 	//Not used
 	void ble_evt_gap_mode_changed(const struct ble_msg_gap_mode_changed_evt_t *msg);
@@ -679,6 +682,7 @@ public:
 	void(*ble_evt_dfu_boot)(const struct ble_msg_dfu_boot_evt_t *msg);
 	*/
 	//Reset device
+	
 
 	/* These are the methods that can pass data back to UI thread */
 signals:

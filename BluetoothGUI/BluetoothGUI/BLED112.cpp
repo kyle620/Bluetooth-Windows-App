@@ -135,13 +135,14 @@ BLED112::BLED112()
 	ble_evt_sm_passkey_display = 0;
 	ble_evt_sm_passkey_request = 0;
 	ble_evt_sm_bond_status = 0;
-	ble_evt_gap_scan_response = 0;
+	ble_evt_gap_scan_response = my_ble_evt_gap_scan_response;
 	ble_evt_gap_mode_changed = 0;
 	ble_evt_hardware_io_port_status = 0;
 	ble_evt_hardware_soft_timer = 0;
 	ble_evt_hardware_adc_result = 0;
 	ble_evt_dfu_boot = 0;
 	*/
+	
 }
 BLED112::~BLED112()
 {
@@ -281,13 +282,15 @@ int BLED112::readMessage() {
 			return GetLastError();
 		}
 	}
-	//apimsg = ble_get_msg_hdr(apihdr);
-	//if (!apimsg)
-	//{
-	//	qDebug() << "ERROR: Message not found: " << QString::number((int)apihdr.cls) << " " << QString::number((int)apihdr.command);
-	//	return -1;
-	//}
+	apimsg = ble_get_msg_hdr(apihdr);
+	if (!apimsg)
+	{
+		qDebug() << "ERROR: Message not found: " << QString::number((int)apihdr.cls) << " " << QString::number((int)apihdr.command);
+		return -1;
+	}
+	
 	//apimsg->handler(data);
+	handleResponse(apimsg, data);
 
 	return 0;
 }
@@ -306,9 +309,12 @@ void BLED112::stopThread() {
 	this->thread()->quit();
 }
 
-/* 
-void ble_evt_gap_scan_response(const struct ble_msg_gap_scan_response_evt_t *msg)
+/*
+void ble_evt_gap_scan_response(unsigned char* data)
 {
+	for (int i = 0; i < sizeof(data); i++) {
+		qDebug() << "data: " << i;
+	}
 	
 	QString length = QString::number(msg->data.len);
 	int i;
@@ -318,7 +324,88 @@ void ble_evt_gap_scan_response(const struct ble_msg_gap_scan_response_evt_t *msg
 	qDebug() << "RSSI: " << QString::number(msg->rssi);
 	for (i = 0; i < msg->data.len; i++)
 		qDebug() << "Data: " << QString::number(msg->data.data[i]);
+		
 } */
+
+void BLED112::handleResponse(const struct ble_msg* msg, unsigned char* data) {
+	switch (msg->msgType) {
+	case 210:
+		break;
+	case 211:
+		break;
+	case 212:
+		break;
+	case 213:
+		break;
+	case 214:
+		break;
+	case 215:
+		break;
+	case 216:
+		break;
+	case 217: 
+		break;
+	case 218:
+		break;
+	case 219:
+		break;
+	case 220:
+		break;
+	case 221:
+		break;
+	case 222:
+		break;
+	case 223:
+		break;
+	case 224:
+		break;
+	case 225:
+		break;
+	case 226:
+		break;
+	case 227:
+		break;
+	case 228:
+		break;
+	case 229:
+		break;
+	case 230:
+		break;
+	case 231:
+		break;
+	case 232:
+		break;
+	case 233:
+		break;
+	case 234:
+		break;
+	case 235:
+		break;
+	case 236:
+		break;
+	case 237:
+		break;
+	case 238:
+		// scan response
+		ble_evt_gap_scan_response(data);
+		break;
+	case 239:
+		break;
+	case 240:
+		break;
+	case 241:
+		break;
+	case 242:
+		break;
+	case 243:
+		break;
+	case 244:
+		break;
+	default:
+		break;
+
+	} // end of switch
+} // end of handleResponse
 
 int BLED112::parsePacket(unsigned char ch)
 {
@@ -340,6 +427,7 @@ int BLED112::parsePacket(unsigned char ch)
 	*/
 
 	// check packet position 
+	/*
 	if (bgapiRXBufferPos == 0) {
 		// beginning of packet, check for correct framing/expected byte(s)
 		// BGAPI packet for Bluetooth Smart Single Mode must be either Command/Response (0x00) or Event (0x80)
@@ -714,7 +802,7 @@ int BLED112::parsePacket(unsigned char ch)
 			}
 		}
 	
-	}
+	} */
 		
 		return 0; // parsed successfully
 		
@@ -723,8 +811,11 @@ int BLED112::parsePacket(unsigned char ch)
 //	return 0; // parsed successfully
 //} 
 
-void BLED112::ble_evt_gap_scan_response(const ble_msg_gap_scan_response_evt_t * msg)
+void BLED112::ble_evt_gap_scan_response(unsigned char* data)
 {
+	for (int i = 0; i < sizeof(data); i++) {
+		qDebug() << "data: " << data[i];
+	}
 }
 
 void BLED112::ble_rsp_system_reset(const void * nul)
