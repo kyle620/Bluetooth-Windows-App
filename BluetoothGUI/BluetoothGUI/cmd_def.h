@@ -54,6 +54,8 @@ extern "C" {
 #endif
 #endif
 #endif
+
+	/* These are added defines used to set msgType inside of ble_msg structor */
 #define DEFAULT 0
 #define evt_system_boot 210
 #define evt_system_debug 211
@@ -106,7 +108,7 @@ extern "C" {
 		struct ble_header    hdr;
 		uint32               params;
 		ble_cmd_handler      handler;
-		int					msgType;	// lets us know which  message we have
+		int					msgType;	// lets us know which  message we have ( see ble_msg  apis[] )
 	};
 
 	const struct ble_msg * ble_find_msg_hdr(struct ble_header hdr);
