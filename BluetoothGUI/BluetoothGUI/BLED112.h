@@ -434,7 +434,7 @@ public:
 	void ble_evt_sm_bond_status(const struct ble_msg_sm_bond_status_evt_t *msg);
 
 	//Scan Response
-	void ble_evt_gap_scan_response(unsigned char* data);
+	void ble_evt_gap_scan_response(const struct ble_msg_gap_scan_response_evt_t *msg);
 
 	//Not used
 	void ble_evt_gap_mode_changed(const struct ble_msg_gap_mode_changed_evt_t *msg);

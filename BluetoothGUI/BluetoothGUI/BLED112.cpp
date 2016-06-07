@@ -309,23 +309,28 @@ void BLED112::stopThread() {
 	this->thread()->quit();
 }
 
-/*
-void ble_evt_gap_scan_response(unsigned char* data)
+
+void BLED112::ble_evt_gap_scan_response(const struct ble_msg_gap_scan_response_evt_t *msg)
 {
-	for (int i = 0; i < sizeof(data); i++) {
-		qDebug() << "data: " << i;
-	}
-	
+	QString address = "";
 	QString length = QString::number(msg->data.len);
 	int i;
 	qDebug() << "Size of data is: " << length;
-	for (i = 0; i < 6; i++)
+	for (i = 0; i < 6; i++) {
+		address += QString::number(msg->sender.addr[5 - i], 16);
+		if (i < 5)
+			address += ":";
 		qDebug() << QString::number(msg->sender.addr[5 - i]), i<5 ? ":" : "";
-	qDebug() << "RSSI: " << QString::number(msg->rssi);
-	for (i = 0; i < msg->data.len; i++)
-		qDebug() << "Data: " << QString::number(msg->data.data[i]);
+	}
+	updateLOG(address);
+	//qDebug() << "RSSI: " << QString::number(msg->rssi);
+	for (i = 0; i < msg->data.len; i++) {
+
+		//qDebug() << "Data: " << QString::number(msg->data.data[i]);
+	}
 		
-} */
+		
+} 
 
 void BLED112::handleResponse(const struct ble_msg* msg, unsigned char* data) {
 	switch (msg->msgType) {
@@ -387,7 +392,7 @@ void BLED112::handleResponse(const struct ble_msg* msg, unsigned char* data) {
 		break;
 	case 238:
 		// scan response
-		ble_evt_gap_scan_response(data);
+		ble_evt_gap_scan_response((const struct ble_msg_gap_scan_response_evt_t *)data);
 		break;
 	case 239:
 		break;
@@ -811,12 +816,6 @@ int BLED112::parsePacket(unsigned char ch)
 //	return 0; // parsed successfully
 //} 
 
-void BLED112::ble_evt_gap_scan_response(unsigned char* data)
-{
-	for (int i = 0; i < sizeof(data); i++) {
-		qDebug() << "data: " << data[i];
-	}
-}
 
 void BLED112::ble_rsp_system_reset(const void * nul)
 {
